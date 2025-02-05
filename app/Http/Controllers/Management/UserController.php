@@ -44,7 +44,7 @@ class UserController extends Controller
         $request->validate([
             'name'      => 'required|max:255',
             'username'  => 'required|alpha_num:ascii|min:5|max:255',
-            'password'  => 'required|confirmed|min:5|max:255',
+            'password'  => 'required|confirmed|min:3|max:255',
             'levels' => 'required|min:1',
             'is_active' => 'required|boolean'
         ],[
@@ -57,7 +57,7 @@ class UserController extends Controller
             'username.unique'       => 'Username telah digunakan oleh akun lain!',
             'password.max'          => 'Maksimal 255 karakter!',
             'username.min'          => 'Minimal 5 karakter!',
-            'password.min'          => 'Minimal 5 karakter!',
+            'password.min'          => 'Minimal 3 karakter!',
             'password.confirmed'    => 'Password dan Password konfirmasi tidak sama!',
             'levels.required'       => 'Level harus dipilih!',
             'levels.min'            => 'Level harus dipilih!',
@@ -100,16 +100,16 @@ class UserController extends Controller
 
         $request->validate([
             'username' => 'required|alpha_num:ascii|min:5|max:255',
-            'password' => 'nullable|confirmed|min:5|max:255',
+            'password' => 'nullable|confirmed|min:3|max:255',
             'is_active' => 'required|boolean',
-            'levels' => 'required|min:1',
+            'levels' => 'required|min:2',
         ], [
             'username.required' => 'Username harus diisi!',
             'username.max' => 'Maksimal 255 karakter!',
             'username.alpha_num'    => 'Username hanya boleh diisi karakter A-Z a-z 0-9!',
             'password.max' => 'Maksimal 255 karakter!',
             'username.min' => 'Minimal 5 karakter!',
-            'password.min' => 'Minimal 5 karakter!',
+            'password.min' => 'Minimal 3 karakter!',
             'password.confirmed' => 'Password dan Password konfirmasi tidak sama!',
             'is_active.request' => 'Status harus diisi!',
             'is_active.boolean' => 'Status hanya boleh diisi aktif / tidak aktif!',

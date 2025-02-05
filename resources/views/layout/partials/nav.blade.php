@@ -13,6 +13,24 @@ $sidebarItems = [
         "levels" => ["admin"]
     ],
     [
+        "title" => "Kelas",
+        "icon" => "fa fa-institution",
+        "url" => "/managements/majors",
+        "levels" => ["admin"]
+    ],
+    [
+        "title" => "Tingkat",
+        "icon" => "fa fa-building",
+        "url" => "/managements/classes",
+        "levels" => ["admin"]
+    ],
+    [
+        "title" => "Siswa",
+        "icon" => "fa fa-building",
+        "url" => "/managements/students",
+        "levels" => ["admin"]
+    ],
+    [
         "title" => "Pengaturan Akun",
         "icon" => "fa fa-key",
         "submenu" => [
