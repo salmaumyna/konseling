@@ -55,7 +55,7 @@
                                             <th>Nama Siswa</th>
                                             <th>Tingkat</th>
                                             <th>Nama Kelas</th>
-                                            <th width="20%">Aksi</th>
+                                            <th width="20%" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,8 +67,11 @@
                                                 <td>{{ $student->kelas->name ?? '-' }}</td>
                                                 <td>{{ $student->major->name ?? '-' }}</td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('mgt.students.edit', $student->id) }}" class="btn btn-success btn-sm">Ubah</a>
                                                     @if($isActive)
+                                                    <a href="{{ route('mgt.students.edit', $student->id) }}"
+                                                            class="btn btn-success btn-sm">
+                                                            Ubah
+                                                        </a>
                                                         <button type="button"
                                                                 data-action="{{ route('mgt.students.inactivate', $student->id) }}"
                                                                 data-confirm-text="Anda yakin menonaktifkan siswa ini?"

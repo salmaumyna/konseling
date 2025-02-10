@@ -1,17 +1,17 @@
 @extends('layout.mainlayout')
 
-@section('title', 'Tambah Jurusan')
+@section('title', 'Tambah Kelas')
 
 @section('content')
     @component('components.breadcrumb')
         @slot('title')
-            Jurusan
+            Kelas
         @endslot
         @slot('li_1')
             @slot('link')
                 {{ route('mgt.majors.index') }}
             @endslot
-            Jurusan
+            Kelas
         @endslot
         @slot('li_2')
             Form Tambah Baru
@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <!-- Nama Jurusan -->
                     <div class="form-group">
-                        <label>Nama Jurusan <span class="text-danger">*</span></label>
+                        <label>Nama Kelas <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
                             <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" required value="{{ old('name') }}">
                             <div class="invalid-feedback">

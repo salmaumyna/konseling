@@ -9744,7 +9744,7 @@ progress {
   }
   .col-lg-4 {
     flex: 0 0 auto;
-    width: 33.33333333%;
+    width: 38.33333333%;
   }
   .col-lg-5 {
     flex: 0 0 auto;
@@ -20919,6 +20919,18 @@ code {
   font-size: 1.125rem;
   margin-bottom: 0;
 }
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 380px) {
+  .page-title {
+    font-size: 10px;
+    margin-bottom: 0;
+  }
+}
 .page-title .page-title-icon {
   display: inline-block;
   width: 36px;
@@ -22292,6 +22304,13 @@ code {
   border-color: #b66dff;
 }
 
+@media (max-width: 480px) {
+  .btn-primary:not(.btn-light) {
+    color: #ffffff;
+    padding: 10px;
+    margin: 5px;
+}
+}
 .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
   background: linear-gradient(to right, #da8cff, #9a55ff);
   color: #000000;
@@ -22334,6 +22353,12 @@ code {
   border-color: #c3bdbd;
 }
 
+@media (max-width: 480px) {
+  .btn-secondary:not(.btn-light) {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
 .btn-outline-secondary:hover, .btn-outline-secondary:focus, .btn-outline-secondary:active {
   background: linear-gradient(to right, #e7ebf0, #868e96);
   color: #000000;
@@ -22601,6 +22626,7 @@ code {
   -o-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
+
 .btn-gradient-primary:not([disabled]):not(.disabled):active, .btn-gradient-primary:not([disabled]):not(.disabled).active, .show > .btn-gradient-primary.dropdown-toggle {
   background: linear-gradient(to right, #da8cff, #9a55ff);
 }
@@ -22612,6 +22638,24 @@ code {
 }
 .btn-gradient-primary:not(.btn-gradient-light):hover, .btn-gradient-primary:not(.btn-gradient-light):focus, .btn-gradient-primary:not(.btn-gradient-light):active {
   color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  .btn-gradient-primary:not(.btn-gradient-light) {
+    color: #ffffff;
+    padding: 8px;
+    font-size: 9px;
+  }
+  .btn i, .ajax-upload-dragdrop .ajax-file-upload i {
+    font-size: .50rem;
+  }
+}
+@media (max-width: 380px) {
+  .btn-gradient-primary:not(.btn-gradient-light) {
+    color: #ffffff;
+    padding: 6px;
+    font-size: 8px;
+  }
 }
 
 .btn-gradient-secondary {
@@ -22850,6 +22894,18 @@ code {
 .breadcrumb.bg-primary .breadcrumb-item span, .breadcrumb.bg-info .breadcrumb-item a,
 .breadcrumb.bg-info .breadcrumb-item span {
   color: inherit;
+}
+
+@media (max-width: 480px) {
+  .breadcrumb .breadcrumb-item {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .breadcrumb .breadcrumb-item {
+    font-size: 8px;
+  }
 }
 
 /* inverse breadcrumb */
@@ -24986,6 +25042,7 @@ dl li {
   color: #ffffff;
 }
 .auth .auth-form-light {
+  border-radius: 15px;
   background: #ffffff;
 }
 .auth .auth-form-light select {
@@ -25045,7 +25102,7 @@ dl li {
 .auth form .form-group .tt-query,
 .auth form .form-group .tt-hint {
   background: transparent;
-  border-radius: 0;
+  border-radius: 15px;
   font-size: 0.9375rem;
 }
 .auth form .form-group .form-select {
@@ -25056,6 +25113,7 @@ dl li {
 .auth form .auth-form-btn {
   height: 50px;
   line-height: 1.5;
+  border-radius: 30px;
 }
 .auth form .auth-link {
   font-size: 0.875rem;
@@ -25180,7 +25238,7 @@ dl li {
 .navbar .navbar-brand-wrapper .navbar-brand img {
   width: calc(260px - 120px);
   max-width: 100%;
-  height: 28px;
+  height: 35px;
   margin: auto;
   vertical-align: middle;
 }
@@ -25188,9 +25246,9 @@ dl li {
   display: none;
 }
 .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini img {
-  width: calc(70px - 50px);
+  width: calc(80px - 40px);
   max-width: 100%;
-  height: 28px;
+  height: 32px;
   margin: auto;
 }
 .navbar .navbar-menu-wrapper {
@@ -25210,7 +25268,35 @@ dl li {
     padding-left: 15px;
     padding-right: 15px;
   }
+  .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini img {
+    width: calc(80px - 40px);
+    max-width: 100%;
+    height: 20px;
+    margin: auto;
+  }
 }
+
+.navbar .navbar-menu-wrapper .nav-title {
+  margin-top: 23px;
+  margin-bottom: auto;
+  font-size: 20px;
+  color: #624e88;
+}
+@media (max-width: 991px){
+  .navbar .navbar-menu-wrapper .nav-title {
+    margin-top: 23px;
+    margin-bottom: auto;
+    font-size: 18px;
+  }
+}
+@media (max-width: 480px){
+  .navbar .navbar-menu-wrapper .nav-title {
+    margin-top: 28px;
+    margin-bottom: auto;
+    font-size: 14px;
+  }
+}
+
 .navbar .navbar-menu-wrapper .navbar-toggler {
   border: 0;
   color: inherit;

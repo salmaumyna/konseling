@@ -55,7 +55,7 @@
                                             <th>Nama</th>
                                             <th>Username</th>
                                             <th>Hak Akses</th>
-                                            <th width="10%">Aksi</th>
+                                            <th width="10%" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

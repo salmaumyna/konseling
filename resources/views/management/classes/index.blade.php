@@ -1,23 +1,23 @@
-@section('title', 'Daftar Kelas')
+@section('title', 'Daftar Tingkat')
 
 @extends('layout.mainlayout')
 @section('content')
     @component('components.breadcrumb')
         @slot('title')
-            Daftar Kelas
+            Daftar Tingkat
         @endslot
         @slot('li_1')
             @slot('link')
                 {{ route('mgt.classes.index') }}
             @endslot
-            Kelas
+            Tingkat
         @endslot
         @slot('li_2')
             Daftar
         @endslot
         @slot('action_button')
             <a href="{{ route('mgt.classes.create') }}" class="btn btn-gradient-primary">
-                <i class="fa fa-plus"></i> Tambah Kelas Baru
+                <i class="fa fa-plus"></i> Tambah Tingkat Baru
             </a>
         @endslot
     @endcomponent
@@ -52,8 +52,8 @@
                                     <thead>
                                         <tr>
                                             <th width="10%">No</th>
-                                            <th>Nama Kelas</th>
-                                            <th width="10%">Aksi</th>
+                                            <th>Nama Tingkat</th>
+                                            <th width="10%" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,16 +62,23 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $class->name }}</td>
                                                 <td class="text-end">
-                                                <a href="{{ route('mgt.classes.edit', $class->id) }}" class="btn btn-success btn-sm">Ubah</a>
-                                                    @if($isActive)
-                                                        <button type="button"
-                                                                data-action="{{ route('mgt.students.inactivate', $class->id) }}"
+                                                
+                                                @if($isActive)
+                                                <a href="{{ route('mgt.classes.edit', $class->id) }}"
+                                                           class="btn btn-success btn-sm">
+                                                            Ubah
+                                                        </a>
+                                                        
+                                                            <button type="button"
+                                                                data-action="{{ route('mgt.classes.inactivate', $class->id) }}"
                                                                 data-confirm-text="Anda yakin menonaktifkan tingkat ini?"
                                                                 data-action-method="put"
                                                                 class="btn btn-secondary btn-action btn-sm">
-                                                            Non-Aktifkan
-                                                        </button>
+                                                                Non-Aktifkan
+                                                            </button>
+                                                        
                                                     @else
+                                                    
                                                         <button type="button"
                                                                 data-action="{{ route('mgt.classes.activate', $class->id) }}"
                                                                 data-confirm-text="Anda yakin mengaktifkan tingkat ini?"

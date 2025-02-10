@@ -1,23 +1,23 @@
-@section('title', 'Daftar Jurusan')
+@section('title', 'Daftar Kelas')
 
 @extends('layout.mainlayout')
 @section('content')
     @component('components.breadcrumb')
         @slot('title')
-            Daftar Jurusan
+            Daftar Kelas
         @endslot
         @slot('li_1')
             @slot('link')
                 {{ route('mgt.majors.index') }}
             @endslot
-            Jurusan
+            Kelas
         @endslot
         @slot('li_2')
             Daftar
         @endslot
         @slot('action_button')
             <a href="{{ route('mgt.majors.create') }}" class="btn btn-gradient-primary">
-                <i class="fa fa-plus"></i> Tambah Jurusan Baru
+                <i class="fa fa-plus"></i> Tambah Kelas Baru
             </a>
         @endslot
     @endcomponent
@@ -52,8 +52,8 @@
                                     <thead>
                                         <tr>
                                             <th width="10%">No</th>
-                                            <th>Nama Jurusan</th>
-                                            <th width="10%">Aksi</th>
+                                            <th>Nama Kelas</th>
+                                            <th width="10%" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,7 +70,7 @@
                                                         
                                                             <button type="button"
                                                                     data-action="{{ route('mgt.majors.inactivate', $major->id) }}"
-                                                                    data-confirm-text="Anda yakin menonaktifkan jurusan ini?"
+                                                                    data-confirm-text="Anda yakin menonaktifkan kelas ini?"
                                                                     data-action-method="put"
                                                                     class="btn btn-secondary btn-action btn-sm">
                                                                 Non-Aktifkan
@@ -79,7 +79,7 @@
                                                     @else
                                                         <button type="button"
                                                                 data-action="{{ route('mgt.majors.activate', $major->id) }}"
-                                                                data-confirm-text="Anda yakin mengaktifkan jurusan ini?"
+                                                                data-confirm-text="Anda yakin mengaktifkan kelas ini?"
                                                                 data-action-method="put"
                                                                 class="btn btn-info btn-sm btn-action btn-sm text-white">
                                                             Aktifkan
@@ -88,7 +88,7 @@
                   
                                                             <button type="button"
                                                                     data-action="{{ route('mgt.majors.remove', $major->id) }}"
-                                                                    data-confirm-text="Anda yakin menghapus jurusan ini?"
+                                                                    data-confirm-text="Anda yakin menghapus kelas ini?"
                                                                     data-action-method="delete"
                                                                     class="btn btn-danger btn-sm btn-action btn-sm text-white">
                                                                 Hapus

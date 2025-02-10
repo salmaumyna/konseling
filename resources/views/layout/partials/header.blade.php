@@ -1,10 +1,10 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
     <a class="navbar-brand brand-logo justify-content-center" href="{{ route('mgt.dashboard.index') }}">
-      <img src="{{ url('assets/images/logo.svg') }}" alt="logo" />
+      <img src="{{ url('assets/img/jkons-logo.png') }}" alt="logo" />
     </a>
     <a class="navbar-brand brand-logo-mini" href="{{ route('mgt.dashboard.index') }}">
-      <img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" />
+      <img src="{{ url('assets/img/logo-saja.png') }}" alt="logo" />
     </a>
   </div>
   
@@ -12,6 +12,7 @@
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
       <span class="mdi mdi-menu"></span>
     </button>
+    <h3 class="nav-title">Sistem Penjadwalan Konseling</h3>
     
     <div class="search-field d-none d-md-block">
       

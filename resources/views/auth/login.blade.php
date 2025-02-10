@@ -16,16 +16,17 @@
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">
           <div class="row flex-grow">
-            <div class="col-lg-4 mx-auto">
+            <div class="col-lg-4 mx-auto body-form">
               <div class="auth-form-light text-center p-5">
+              <h4>SISTEM JADWAL KONSELING BK</h4>
                 <div class="d-flex justify-content-center py-4">
                   <div class="brand-logo">
                       <img src="{{ URL::asset('assets/img/logo.png') }}" alt="">
                   </div>
                 </div><!-- End Logo -->
-                <h3>SMKN 1 Cirebon</h3>
-                <h4>Sistem Jadwal Konseling BK</h4>
-                <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
+                <h4>SMKN 1 Cirebon</h4>
+                
+                <h6 class="font-weight-light">Masuk untuk melanjutkan</h6>
 
                 <x-alert />
                 <form class="pt-3" action="{{ route('login.process') }}" method="POST">
