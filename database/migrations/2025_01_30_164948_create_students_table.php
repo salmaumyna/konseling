@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
-            // Ubah 'class' menjadi 'classes' jika tabel referensinya bernama 'classes'
+            
             $table->foreign('tingkat')
                   ->references('id')
                   ->on('classes')
