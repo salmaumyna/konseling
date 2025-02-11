@@ -26,7 +26,7 @@
                 @csrf
                 @method('PUT')
                 <div class="card-body">
-                    <!-- Nama Jurusan -->
+                    
                     <div class="form-group">
                         <label>Nama Kelas <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <!-- Status -->
+                    
                     <div class="form-group">
                         <label>Status <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
