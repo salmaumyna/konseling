@@ -37,11 +37,12 @@ $sidebarItems = [
         "levels" => ["admin"]
     ],
     [
-        "title" => "Schedule Report",
+        "title" => "Laporan Konseling",
         "icon" => "fa fa-building",
-        "url" => "/managements/counseling/reports",
-        "levels" => ["teacher"]
+        "url" => route('counseling.index'),
+        "levels" => ["teacher", "admin"]
     ],
+    
     [
         "title" => "Pengaturan Akun",
         "icon" => "fa fa-key",
