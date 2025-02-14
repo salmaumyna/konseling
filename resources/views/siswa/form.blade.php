@@ -3,10 +3,12 @@
 @section('title', 'Form Pengajuan Konseling')
 
 @section('content')
+
+@include('layout.partials.head')
+@stack('styles')
 <style>
     body {
-        background: #f8f9fc;
-        font-family: 'Poppins', sans-serif;
+        background: #F4EEFF;
     }
 
     .form-container {
@@ -14,10 +16,11 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
+        margin-bottom: 30px;
     }
 
     .form-card {
-        width: 420px;
+        width: 500px;
         background: white;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -29,18 +32,20 @@
         font-size: 20px;
         font-weight: bold;
         color: #333;
-        margin-bottom: 15px;
+        margin-bottom: 40px;
+        margin-top: 10px;
     }
 
     .form-group label {
         font-weight: 600;
         color: #444;
         display: block;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     .form-control {
         width: 100%;
+        max-width: 455px;
         padding: 8px;
         border: 2px solid #ced4da;
         border-radius: 6px;
@@ -67,6 +72,7 @@
     }
 
     .text-danger {
+        color: #BB5A5A;
         font-size: 13px;
         font-weight: bold;
     }
@@ -131,16 +137,18 @@
                 @enderror
             </div>
 
+            <span class="text-muted">
+                <strong class="text-danger">* Harus diisi</strong>
+            </span>
             <div class="card-footer text-end">
-                        <span class="text-muted float-start">
-                            <strong class="text-danger">*</strong> Harus diisi
-                        </span>
-                        <a href="{{ route('counseling.nis') }}" class="btn btn-primary">Kembali</a>
-                        <button type="submit" class="btn btn-primary">Kirim</button>
-                    </div>
+                <a href="{{ route('counseling.nis') }}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-block btn-gradient-primary">Kirim</button>
+            </div>
 
         </form>
     </div>
 </div>
 
+@include('layout.partials.footer-scripts')
+@stack('scripts')
 @endsection

@@ -22,30 +22,44 @@ class UserSeeder extends Seeder
                 'levels' => 'admin'
             ],
             [
-                'name' => 'salmaumayna',
-                'username' => 'salma',
-                'password' => bcrypt('salma'),
+                'name' => 'Sri Prihantoro',
+                'username' => 'sriprihantoro',
+                'password' => bcrypt('sri'),
                 'is_active' => true,
                 'levels' => 'admin'
             ],
             [
-                'name' => 'livia',
-                'username' => 'livia',
-                'password' => bcrypt('livia'),
-                'is_active' => true,
-                'levels' => 'admin'
-            ],
-            [
-                'name' => 'ardiansyah',
-                'username' => 'ardiyansyah',
-                'password' => bcrypt('ardiyansyah'),
+                'name' => 'Titin Suryaningsih',
+                'username' => 'titinsuryaningsih',
+                'password' => bcrypt('titin'),
                 'is_active' => true,
                 'levels' => 'teacher'
             ],
             [
-                'name' => 'harun',
-                'username' => 'harun',
-                'password' => bcrypt('harun'),
+                'name' => 'Ana Rosaenah',
+                'username' => 'anarosaenah',
+                'password' => bcrypt('ana'),
+                'is_active' => true,
+                'levels' => 'teacher'
+            ],
+            [
+                'name' => 'Farhatun Aathiroh',
+                'username' => 'farhatunaathiroh',
+                'password' => bcrypt('farhatun'),
+                'is_active' => true,
+                'levels' => 'teacher'
+            ],
+            [
+                'name' => 'Selly Apriliani',
+                'username' => 'sellyapriliani',
+                'password' => bcrypt('selly'),
+                'is_active' => true,
+                'levels' => 'teacher'
+            ],
+            [
+                'name' => 'Mufidah Istiqomah',
+                'username' => 'mufidahistiqomah',
+                'password' => bcrypt('isti'),
                 'is_active' => true,
                 'levels' => 'teacher'
             ],

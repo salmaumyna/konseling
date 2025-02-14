@@ -53,7 +53,7 @@
                                         <tr>
                                             <th width="10%">No</th>
                                             <th>Nama Kelas</th>
-                                            <th width="10%">Aksi</th>
+                                            <th width="10%" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

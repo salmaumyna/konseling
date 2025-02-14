@@ -1,4 +1,4 @@
-@section('title', 'Daftar Kelas')
+@section('title', 'Daftar Tingkat')
 
 @extends('layout.mainlayout')
 @section('content')
@@ -53,7 +53,7 @@
                                         <tr>
                                             <th width="10%">No</th>
                                             <th>Nama Tingkat</th>
-                                            <th width="10%">Aksi</th>
+                                            <th width="10%" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,16 +62,23 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $class->name }}</td>
                                                 <td class="text-end">
-                                                <a href="{{ route('mgt.classes.edit', $class->id) }}" class="btn btn-success btn-sm">Ubah</a>
-                                                    @if($isActive)
-                                                        <button type="button"
+                                                
+                                                @if($isActive)
+                                                <a href="{{ route('mgt.classes.edit', $class->id) }}"
+                                                           class="btn btn-success btn-sm">
+                                                            Ubah
+                                                        </a>
+                                                        
+                                                            <button type="button"
                                                                 data-action="{{ route('mgt.classes.inactivate', $class->id) }}"
                                                                 data-confirm-text="Anda yakin menonaktifkan tingkat ini?"
                                                                 data-action-method="put"
                                                                 class="btn btn-secondary btn-action btn-sm">
-                                                            Non-Aktifkan
-                                                        </button>
+                                                                Non-Aktifkan
+                                                            </button>
+                                                        
                                                     @else
+                                                    
                                                         <button type="button"
                                                                 data-action="{{ route('mgt.classes.activate', $class->id) }}"
                                                                 data-confirm-text="Anda yakin mengaktifkan tingkat ini?"

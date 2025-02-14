@@ -3,10 +3,12 @@
 @section('title', 'Form Pengisian NIS')
 
 @section('content')
+
+@include('layout.partials.head')
+@stack('styles')
 <style>
     body {
-        background: #f8f9fc;
-        font-family: 'Poppins', sans-serif;
+        background: #F5EFFF;
     }
 
     .form-container {
@@ -35,7 +37,7 @@
         font-size: 20px;
         font-weight: bold;
         color: #333;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
 
     .form-body label {
@@ -47,11 +49,17 @@
 
     .form-control {
         width: 100%;
+        max-width: 355px;
         padding: 8px;
+        margin-bottom: 8px;
         border: 2px solid #ced4da;
         border-radius: 6px;
         font-size: 14px;
         transition: 0.3s;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
     }
 
     .form-control:focus {
@@ -68,9 +76,10 @@
 
     .form-footer {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         margin-top: 15px;
+        margin-right: 5px;
     }
 
     .btn {
@@ -85,7 +94,8 @@
     }
 
     .btn-secondary {
-        background: #6c757d;
+        margin-right: 10px;
+        background: #B4B4B8;
         color: white;
     }
 
@@ -103,17 +113,19 @@
     }
 
     .text-danger {
+        color: #BB5A5A;
         font-size: 13px;
         font-weight: bold;
     }
+
 </style>
 
+<x-alert />
 <div class="form-container">
     <div class="form-card">
         <div class="form-header">
             Form Pengisian NIS
         </div>
-        <x-alert />
         <form action="{{ route('counseling.process') }}" method="POST">
             @csrf
             <div class="form-body">
@@ -126,13 +138,17 @@
                         {{ $message }}
                     </div>
                 @enderror
+                <span class="text-danger">*<sup> wajib diisi</sup></span>
             </div>
             <div class="form-footer">
-                <span class="text-danger"><strong>*</strong> Wajib diisi</span>
+                
                 <a href="{{ route('counseling.nis') }}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-info">Lanjutkan</button>
+                <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Lanjutkan</button>
             </div>
         </form>
     </div>
 </div>
+
+@include('layout.partials.footer-scripts')
+@stack('scripts')
 @endsection

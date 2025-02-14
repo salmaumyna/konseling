@@ -93,7 +93,8 @@ class ClassesController extends Controller
         $class = ClassModel::find($id);
         abort_if(!$class, 400, 'Kelas tidak ditemukan');
 
-        $class->update(['is_active' => true]);
+        $class->is_active = true;
+        $class->save();
 
         return redirect()->route('mgt.classes.index', ['view' => 'active'])->withSuccess('Kelas berhasil diaktifkan!');
     }
@@ -104,7 +105,8 @@ class ClassesController extends Controller
         $class = ClassModel::find($id);
         abort_if(!$class, 400, 'Kelas tidak ditemukan');
 
-        $class->update(['is_active' => false]);
+        $class->is_active = false;
+        $class->save();
 
         return redirect()->route('mgt.classes.index', ['view' => 'inactive'])->withSuccess('Kelas berhasil dinonaktifkan!');
     }

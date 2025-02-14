@@ -28,7 +28,7 @@
                 <div class="card-body">
                     
                     <div class="form-group">
-                        <label>Nama Kelas<span class="text-danger">*</span></label>
+                        <label>Nama Kelas <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
                             <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" required value="{{ old('name', $major->name) }}">
                             <div class="invalid-feedback">

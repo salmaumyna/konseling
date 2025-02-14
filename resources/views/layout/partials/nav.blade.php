@@ -14,28 +14,28 @@ $sidebarItems = [
     ],
     [
         "title" => "Kelas",
-        "icon" => "fa fa-institution",
+        "icon" => "fa fa-building",
         "url" => "/managements/majors",
         "levels" => ["admin"]
     ],
     [
         "title" => "Tingkat",
-        "icon" => "fa fa-building",
+        "icon" => "fa fa-bar-chart-o",
         "url" => "/managements/classes",
         "levels" => ["admin"]
     ],
     [
         "title" => "Siswa",
-        "icon" => "fa fa-building",
+        "icon" => "fa fa-users",
         "url" => "/managements/students",
         "levels" => ["admin"]
     ],
-    [
-        "title" => "Grafik",
-        "icon" => "fa fa-building",
-        "url" => "/managements/students",
-        "levels" => ["admin"]
-    ],
+    // [
+    //     "title" => "Grafik",
+    //     "icon" => "fa fa-building",
+    //     "url" => "/managements/students",
+    //     "levels" => ["admin"]
+    // ],
     [
         "title" => "Laporan Konseling",
         "icon" => "fa fa-building",
@@ -45,7 +45,7 @@ $sidebarItems = [
     
     [
         "title" => "Pengaturan Akun",
-        "icon" => "fa fa-key",
+        "icon" => "fa fa-cog",
         "submenu" => [
             [
                 "title" => "Ganti Password",
