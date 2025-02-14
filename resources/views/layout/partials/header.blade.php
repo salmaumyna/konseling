@@ -22,6 +22,7 @@
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
           aria-expanded="false">
+          <!-- <i class="mdi mdi-account-circle text-primary"></i> -->
           <div class="nav-profile-text">
             <p class="mb-1 text-black">{{ auth()->user()->name }}</p>
           </div>

@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'username' => 'sriprihantoro',
                 'password' => bcrypt('sri'),
                 'is_active' => true,
-                'levels' => 'admin', 'teacher'
+                'levels' => 'admin'
             ],
             [
                 'name' => 'Titin Suryaningsih',

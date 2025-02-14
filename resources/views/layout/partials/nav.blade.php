@@ -30,12 +30,12 @@ $sidebarItems = [
         "url" => "/managements/students",
         "levels" => ["admin"]
     ],
-    [
-        "title" => "Grafik",
-        "icon" => "fa fa-building",
-        "url" => "/managements/students",
-        "levels" => ["admin"]
-    ],
+    // [
+    //     "title" => "Grafik",
+    //     "icon" => "fa fa-building",
+    //     "url" => "/managements/students",
+    //     "levels" => ["admin"]
+    // ],
     [
         "title" => "Schedule Report",
         "icon" => "fa fa-building",

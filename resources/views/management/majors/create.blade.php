@@ -29,8 +29,9 @@
                     <div class="form-group">
                         <label>Nama Kelas <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
-                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" required value="{{ old('name') }}">
-                            <div class="invalid-feedback">
+                        <input type="text" name="name" maxlength="255" minlength="3"
+                                    class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+                                <div class="invalid-feedback">
                                 @error('name')
                                     {{ $message }}
                                 @enderror

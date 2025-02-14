@@ -65,6 +65,6 @@ class CounselingReportController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect()->route('counseling.nis')->with('success', 'Pengajuan berhasil dikirim!');
+        return redirect()->route('counseling.nis')->withSuccess('Pengajuan berhasil dikirim!');
     }
 }
