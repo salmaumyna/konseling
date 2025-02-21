@@ -27,21 +27,21 @@ class ClassesController extends Controller
         );
     }
 
-    // Menampilkan form untuk membuat kelas baru
+    // Menampilkan form untuk membuat tingkat baru
     public function create()
     {
         return view('management.classes.create');
     }
 
-    // Menyimpan data kelas baru
+    // Menyimpan data tingkat baru
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|max:255',
             'is_active' => 'required|boolean',
         ], [
-            'name.required' => 'Nama kelas harus diisi!',
-            'name.max' => 'Nama kelas maksimal 255 karakter!',
+            'name.required' => 'Nama tingkat harus diisi!',
+            'name.max' => 'Nama tingkat maksimal 255 karakter!',
             'is_active.required' => 'Status harus diisi!',
             'is_active.boolean' => 'Status hanya boleh diisi dengan nilai boolean (true/false)!',
         ]);
@@ -51,30 +51,30 @@ class ClassesController extends Controller
             'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('mgt.classes.index')->withSuccess('Kelas berhasil ditambahkan!');
+        return redirect()->route('mgt.classes.index')->withSuccess('tingkat berhasil ditambahkan!');
     }
 
-    // Menampilkan form untuk mengedit kelas
+    // Menampilkan form untuk mengedit tingkat
     public function edit($id)
     {
         $class = ClassModel::find($id);
-        abort_if(!$class, 400, 'Kelas tidak ditemukan');
+        abort_if(!$class, 400, 'tingkat tidak ditemukan');
 
         return view('management.classes.edit', compact('class'));
     }
 
-    // Mengupdate data kelas
+    // Mengupdate data tingkat
     public function update($id, Request $request)
     {
         $class = ClassModel::find($id);
-        abort_if(!$class, 400, 'Kelas tidak ditemukan');
+        abort_if(!$class, 400, 'tingkat tidak ditemukan');
 
         $request->validate([
             'name' => 'required|max:255',
             'is_active' => 'required|boolean',
         ], [
-            'name.required' => 'Nama kelas harus diisi!',
-            'name.max' => 'Nama Kelas maksimal 255 karakter!',
+            'name.required' => 'Nama tingkat harus diisi!',
+            'name.max' => 'Nama tingkat maksimal 255 karakter!',
             'is_active.required' => 'Status harus diisi!',
             'is_active.boolean' => 'Status hanya boleh diisi dengan nilai boolean (true/false)!',
         ]);
@@ -84,41 +84,41 @@ class ClassesController extends Controller
             'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('mgt.classes.index')->withSuccess('Kelas berhasil diperbarui!');
+        return redirect()->route('mgt.classes.index')->withSuccess('tingkat berhasil diperbarui!');
     }
 
-    // Mengaktifkan kelas
+    // Mengaktifkan tingkat
     public function activate($id)
     {
         $class = ClassModel::find($id);
-        abort_if(!$class, 400, 'Kelas tidak ditemukan');
+        abort_if(!$class, 400, 'tingkat tidak ditemukan');
 
         $class->is_active = true;
         $class->save();
 
-        return redirect()->route('mgt.classes.index', ['view' => 'active'])->withSuccess('Kelas berhasil diaktifkan!');
+        return redirect()->route('mgt.classes.index', ['view' => 'active'])->withSuccess('tingkat berhasil diaktifkan!');
     }
 
-    // Menonaktifkan kelas
+    // Menonaktifkan tingkat
     public function inactivate($id)
     {
         $class = ClassModel::find($id);
-        abort_if(!$class, 400, 'Kelas tidak ditemukan');
+        abort_if(!$class, 400, 'tingkat tidak ditemukan');
 
         $class->is_active = false;
         $class->save();
 
-        return redirect()->route('mgt.classes.index', ['view' => 'inactive'])->withSuccess('Kelas berhasil dinonaktifkan!');
+        return redirect()->route('mgt.classes.index', ['view' => 'inactive'])->withSuccess('tingkat berhasil dinonaktifkan!');
     }
 
-    // Menghapus kelas
+    // Menghapus tingkat
     public function remove($id)
     {
         $class = ClassModel::find($id);
-        abort_if(!$class, 400, 'Kelas tidak ditemukan');
+        abort_if(!$class, 400, 'tingkat tidak ditemukan');
 
         $class->delete();
 
-        return redirect()->route('mgt.classes.index', ['view' => 'inactive'])->withSuccess('Kelas berhasil dihapus!');
+        return redirect()->route('mgt.classes.index', ['view' => 'inactive'])->withSuccess('tingkat berhasil dihapus!');
     }
 }

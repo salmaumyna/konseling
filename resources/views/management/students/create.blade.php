@@ -28,7 +28,8 @@
                     <div class="form-group">
                         <label>NIS <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
-                            <input name="nis" type="text" class="form-control @error('nis') is-invalid @enderror" required value="{{ old('nis') }}">
+                            <input type="text" name="nis"
+                            class="form-control @error('nis') is-invalid @enderror" value="{{ old('nis') }}">
                             <div class="invalid-feedback">
                                 @error('nis')
                                     {{ $message }}
@@ -40,7 +41,8 @@
                     <div class="form-group">
                         <label>Nama Siswa <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
-                            <input name="nama" type="text" class="form-control @error('nama') is-invalid @enderror" required value="{{ old('nama') }}">
+                            <input type="text" name="nama" maxlength="255" minlength="3"
+                            class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
                             <div class="invalid-feedback">
                                 @error('nama')
                                     {{ $message }}

@@ -29,7 +29,8 @@
                     <div class="form-group">
                         <label>Nama Tingkat <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
-                            <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" required value="{{ old('name') }}">
+                            <input type="text" name="name"
+                            class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                             <div class="invalid-feedback">
                                 @error('name')
                                     {{ $message }}

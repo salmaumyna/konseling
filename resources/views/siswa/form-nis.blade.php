@@ -142,7 +142,7 @@
             </div>
             <div class="form-footer">
                 
-                <a href="{{ route('counseling.nis') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('index') }}" class="btn btn-secondary">Kembali</a>
                 <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Lanjutkan</button>
             </div>
         </form>

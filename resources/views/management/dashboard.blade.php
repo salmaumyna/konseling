@@ -22,7 +22,7 @@ Beranda
 
 <x-alert />
 <div class="row">
-    <div class="col-md-4 stretch-card grid-margin">
+    <!-- <div class="col-md-4 stretch-card grid-margin">
         <div class="card bg-gradient-danger card-img-holder text-white">
             <div class="card-body">
                 <img src="{{ url('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
@@ -58,7 +58,7 @@ Beranda
                 <h6 class="card-text">Increased by 5%</h6>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-md-7 grid-margin stretch-card">
             <div class="card">
@@ -72,7 +72,7 @@ Beranda
                 </div>
             </div>
         </div>
-        <div class="col-md-5 grid-margin stretch-card">
+        <!-- <div class="col-md-5 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Traffic Sources</h4>
@@ -82,7 +82,7 @@ Beranda
                     <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 

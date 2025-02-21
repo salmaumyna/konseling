@@ -42,8 +42,8 @@ class MajorsController extends Controller
             'name' => 'required|max:255',
             'is_active' => 'required|boolean',
         ], [
-            'name.required' => 'Nama jurusan harus diisi!',
-            'name.max' => 'Nama jurusan maksimal 255 karakter!',
+            'name.required' => 'Nama kelas harus diisi!',
+            'name.max' => 'Nama kelas maksimal 255 karakter!',
             'is_active.required' => 'Status harus diisi!',
             'is_active.boolean' => 'Status hanya boleh diisi dengan nilai boolean (true/false)!',
         ]);
@@ -53,30 +53,30 @@ class MajorsController extends Controller
             'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('mgt.majors.index')->withSuccess('Jurusan berhasil ditambahkan!');
+        return redirect()->route('mgt.majors.index')->withSuccess('kelas berhasil ditambahkan!');
     }
 
-    // Menampilkan form untuk mengedit jurusan
+    // Menampilkan form untuk mengedit kelas
     public function edit($id)
     {
         $major = Major::find($id);
-        abort_if(!$major, 400, 'Jurusan tidak ditemukan');
+        abort_if(!$major, 400, 'kelas tidak ditemukan');
 
         return view('management.majors.edit', compact('major'));
     }
 
-    // Mengupdate data jurusan
+    // Mengupdate data kelas
     public function update($id, Request $request)
     {
         $major = Major::find($id);
-        abort_if(!$major, 400, 'Jurusan tidak ditemukan');
+        abort_if(!$major, 400, 'kelas tidak ditemukan');
 
         $request->validate([
             'name' => 'required|max:255',
             'is_active' => 'required|boolean',
         ], [
-            'name.required' => 'Nama jurusan harus diisi!',
-            'name.max' => 'Nama jurusan maksimal 255 karakter!',
+            'name.required' => 'Nama kelas harus diisi!',
+            'name.max' => 'Nama kelas maksimal 255 karakter!',
             'is_active.required' => 'Status harus diisi!',
             'is_active.boolean' => 'Status hanya boleh diisi dengan nilai boolean (true/false)!',
         ]);
@@ -86,39 +86,39 @@ class MajorsController extends Controller
             'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('mgt.majors.index')->withSuccess('Jurusan berhasil diperbarui!');
+        return redirect()->route('mgt.majors.index')->withSuccess('kelas berhasil diperbarui!');
     }
 
-    // Mengaktifkan jurusan
+    // Mengaktifkan kelas
     public function activate($id)
     {
         $major = Major::find($id);
-        abort_if(!$major, 400, 'Jurusan tidak ditemukan');
+        abort_if(!$major, 400, 'kelas tidak ditemukan');
 
         $major->update(['is_active' => true]);
 
-        return redirect()->route('mgt.majors.index', ['view' => 'active'])->withSuccess('Jurusan berhasil diaktifkan!');
+        return redirect()->route('mgt.majors.index', ['view' => 'active'])->withSuccess('kelas berhasil diaktifkan!');
     }
 
-    // Menonaktifkan jurusan
+    // Menonaktifkan kelas
     public function inactivate($id)
     {
         $major = Major::find($id);
-        abort_if(!$major, 400, 'Jurusan tidak ditemukan');
+        abort_if(!$major, 400, 'kelas tidak ditemukan');
 
         $major->update(['is_active' => false]);
 
-        return redirect()->route('mgt.majors.index', ['view' => 'inactive'])->withSuccess('Jurusan berhasil dinonaktifkan!');
+        return redirect()->route('mgt.majors.index', ['view' => 'inactive'])->withSuccess('kelas berhasil dinonaktifkan!');
     }
 
-    // Menghapus jurusan
+    // Menghapus kelas
     public function remove($id)
     {
         $major = Major::find($id);
-        abort_if(!$major, 400, 'Jurusan tidak ditemukan');
+        abort_if(!$major, 400, 'kelas tidak ditemukan');
 
         $major->delete();
 
-        return redirect()->route('mgt.majors.index', ['view' => 'inactive'])->withSuccess('Jurusan berhasil dihapus!');
+        return redirect()->route('mgt.majors.index', ['view' => 'inactive'])->withSuccess('kelas berhasil dihapus!');
     }
 }

@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label>Nama Kelas <span class="text-danger">*</span></label>
                         <div class="col-sm-12">
-                        <input type="text" name="name" maxlength="255" minlength="3"
+                        <input type="text" name="name"
                                     class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                                 <div class="invalid-feedback">
                                 @error('name')
