@@ -30,18 +30,14 @@ $sidebarItems = [
         "url" => "/managements/students",
         "levels" => ["admin"]
     ],
-    // [
-    //     "title" => "Grafik",
-    //     "icon" => "fa fa-building",
-    //     "url" => "/managements/students",
-    //     "levels" => ["admin"]
-    // ],
+    
     [
-        "title" => "Schedule Report",
+        "title" => "Laporan Konseling",
         "icon" => "fa fa-building",
-        "url" => "/managements/counseling/reports",
-        "levels" => ["teacher"]
+        "url" => "managements/conseling-reports",
+        "levels" => ["teacher", "admin"]
     ],
+    
     [
         "title" => "Pengaturan Akun",
         "icon" => "fa fa-cog",
