@@ -22643,8 +22643,8 @@ code {
 @media (max-width: 480px) {
   .btn-gradient-primary:not(.btn-gradient-light) {
     color: #ffffff;
-    padding: 8px;
-    font-size: 9px;
+    padding: 10px;
+    font-size: 14px;
   }
   .btn i, .ajax-upload-dragdrop .ajax-file-upload i {
     font-size: .50rem;
@@ -22653,8 +22653,8 @@ code {
 @media (max-width: 380px) {
   .btn-gradient-primary:not(.btn-gradient-light) {
     color: #ffffff;
-    padding: 6px;
-    font-size: 8px;
+    padding: 10px;
+    font-size: 14px;
   }
 }
 

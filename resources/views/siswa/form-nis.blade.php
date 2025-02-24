@@ -100,7 +100,7 @@
     }
 
     .btn-secondary:hover {
-        background: #5a6268;
+        background: #BFA2DB;
     }
 
     .btn-info {
