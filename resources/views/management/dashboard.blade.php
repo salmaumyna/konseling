@@ -22,69 +22,71 @@ Beranda
 
 <x-alert />
 <div class="row">
-    <!-- <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-danger card-img-holder text-white">
-            <div class="card-body">
-                <img src="{{ url('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
-                    alt="circle-image" />
-                <h4 class="font-weight-normal mb-3">Weekly Sales <i class="mdi mdi-chart-line mdi-24px float-end"></i>
-                </h4>
-                <h2 class="mb-5">$ 15,0000</h2>
-                <h6 class="card-text">Increased by 60%</h6>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-info card-img-holder text-white">
-            <div class="card-body">
-                <img src="{{ url('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
-                    alt="circle-image" />
-                <h4 class="font-weight-normal mb-3">Weekly Orders <i
-                        class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
-                </h4>
-                <h2 class="mb-5">45,6334</h2>
-                <h6 class="card-text">Decreased by 10%</h6>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-success card-img-holder text-white">
-            <div class="card-body">
-                <img src="{{ url('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
-                    alt="circle-image" />
-                <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-end"></i>
-                </h4>
-                <h2 class="mb-5">95,5741</h2>
-                <h6 class="card-text">Increased by 5%</h6>
-            </div>
-        </div>
-    </div> -->
-    <div class="row">
-        <div class="col-md-7 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="clearfix">
-                        <h4 class="card-title float-start">Visit And Sales Statistics</h4>
-                        <div id="visit-sale-chart-legend"
-                            class="rounded-legend legend-horizontal legend-top-right float-end"></div>
-                    </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="col-md-5 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Traffic Sources</h4>
-                    <div class="doughnutjs-wrapper d-flex justify-content-center">
-                        <canvas id="traffic-chart"></canvas>
-                    </div>
-                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
-                </div>
-            </div>
-        </div> -->
+    <div class="col-md-4">
+        <label for="year">Tahun</label>
+        <select id="year" name="year" class="form-control">
+            @for ($i = date('Y'); $i >= 2020; $i--)
+                <option value="{{ $i }}" {{ $i == $year ? 'selected' : '' }}>{{ $i }}</option>
+            @endfor
+        </select>
     </div>
 </div>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <canvas id="counselingChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+        const approved = @json($approved); // Ambil data dari Blade
+
+        console.log("Data Approved:", approved); // Debugging: lihat data di console browser
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Disetujui',
+                data: approved,
+                backgroundColor: 'rgba(40, 167, 69, 0.5)',
+                borderColor: 'rgb(40, 167, 69)',
+                borderWidth: 2,
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: {
+                        display: true,
+                        text: 'Grafik Konseling Siswa ' + '{{ $year }}',
+                        font: { size: 18 }
+                    }
+                },
+                scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+            }
+        };
+
+        const ctx = document.getElementById('counselingChart');
+        if (ctx) {
+            new Chart(ctx, config);
+        } else {
+            console.error("Canvas ID 'counselingChart' tidak ditemukan!");
+        }
+    });
+</script>
+
 
 
 @endsection
