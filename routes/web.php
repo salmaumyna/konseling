@@ -95,7 +95,7 @@ Route::middleware(Authenticate::class)->group(function () {
             Route::put('/', 'update')->name('update');
         });
 
-        Route::prefix('managements/counseling')->name('counseling.')->group(function () {
+        Route::prefix('managements/counseling')->prefix('counseling')->name('counseling.')->group(function () {
             Route::get('/', [MgtCounselingReportController::class, 'index'])->name('index');
             Route::get('/reports/{id}', [MgtCounselingReportController::class, 'show'])->name('detail');
             Route::put('/reports/{id}/update', [MgtCounselingReportController::class, 'updateStatus'])->name('updateStatus');
