@@ -3,21 +3,40 @@
 
 @section('content')
     @component('components.breadcrumb')
-        @slot('title')
-            Laporan Konseling
-        @endslot
-        @slot('li_1')
-            @slot('link')
-                {{ route('Mgt.counseling.index') }}
-            @endslot
+        @slot('title') Laporan Konseling @endslot
+        @slot('li_1') 
+            @slot('link') {{ route('mgt.counseling.index') }} @endslot
             Konseling
         @endslot
-        @slot('li_2')
-            Laporan
-        @endslot
+        @slot('li_2') Laporan @endslot
     @endcomponent
 
     <x-alert />
+
+    <form method="GET" action="{{ route('mgt.counseling.index') }}" class="mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="nis" class="form-label">NIS</label>
+                <input type="text" name="nis" id="nis" class="form-control" value="{{ request('nis') }}" placeholder="Cari berdasarkan NIS">
+            </div>
+            <div class="col-md-4">
+                <label for="status" class="form-label">Status</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="">Semua Status</option>
+                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu</option>
+                    <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Disetujui</option>
+                    <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Ditolak</option>
+                </select>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12 d-flex">
+                    <button type="submit" class="btn btn-primary me-2">Filter</button>
+                    <a href="{{ route('mgt.counseling.index') }}" class="btn btn-secondary me-2">Reset</a>
+                    <a href="{{ route('mgt.counseling.download', request()->all()) }}" class="btn btn-success">Download Excel</a>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <div class="row">
         <div class="col-12">
@@ -30,8 +49,8 @@
                                     <th>No</th>
                                     <th>NIS</th>
                                     <th>Nama Siswa</th>
+                                    <th>Tingkat</th>
                                     <th>Kelas</th>
-                                    <th>Jurusan</th>
                                     <th>Tanggal Konseling</th>
                                     <th>Deskripsi</th>
                                     <th>Status</th>
@@ -42,8 +61,8 @@
                                 @foreach ($counselingReports as $report)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $report->student->student_id }}</td>
-                                        <td>{{ $report->student->name }}</td>
+                                        <td>{{ $report->student->nis }}</td>
+                                        <td>{{ $report->student->nama }}</td>
                                         <td>{{ $report->class->name ?? '-' }}</td>
                                         <td>{{ $report->major->name ?? '-' }}</td>
                                         <td>{{ $report->date }}</td>
@@ -58,11 +77,11 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('Mgt.counseling.detail', $report->id) }}" class="btn btn-primary btn-sm">Detail</a>
+                                            <a href="{{ route('mgt.counseling.detail', $report->id) }}" class="btn btn-primary btn-sm">Detail</a>
                                             @if(auth()->user()->role === 'admin')
-                                                <form action="{{ route('counseling.updateStatus', $report->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('mgt.counseling.updateStatus', $report->id) }}" method="POST" class="d-inline">
                                                     @csrf
-                                                    @method('POST')
+                                                    @method('PUT')
                                                     <button type="submit" class="btn btn-danger btn-sm">Perbarui Status</button>
                                                 </form>
                                             @endif

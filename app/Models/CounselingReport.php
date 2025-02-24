@@ -32,4 +32,14 @@ class CounselingReport extends Model
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
+
+    public function class()
+    {
+        return $this->belongsTo(ClassModel::class, 'class_id'); 
+    }
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class, 'major_id');
+    }
 }

@@ -30,11 +30,11 @@ $sidebarItems = [
         "url" => "/managements/students",
         "levels" => ["admin"]
     ],
-    
+
     [
         "title" => "Laporan Konseling",
-        "icon" => "fa fa-inbox",
-        "url" => "managements/conseling-reports",
+        "icon" => "fa fa-building",
+        "url" => "managements/counseling",
         "levels" => ["teacher", "admin"]
     ],
     

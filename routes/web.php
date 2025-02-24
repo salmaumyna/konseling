@@ -11,9 +11,9 @@ use App\Http\Controllers\Management\UserController as MgtUserController;
 use App\Http\Controllers\Management\ProfileController as MgtProfileController;
 use App\Http\Controllers\CounselingReportController;
 use App\Http\Controllers\LandingPageController as LandingPageController;
-use App\Http\Controllers\Management\ReportController;
+use App\Http\Controllers\Management\ReportApprovedController as MgtReportApprovedController;
 use App\Http\Controllers\CounselingStatusController;
-use App\Http\Controllers\Management\Counseling_ReportController as MgtCounseling_ReportController;
+use App\Http\Controllers\Management\Counseling_ReportController as MgtCounselingReportController;
 use App\Http\Controllers\Management\MajorsController as MgtMajorController;
 use App\Http\Controllers\Management\ClassesController as MgtClassController;
 use App\Http\Controllers\Management\StudentsController as MgtStudentsController;
@@ -95,12 +95,17 @@ Route::middleware(Authenticate::class)->group(function () {
             Route::put('/', 'update')->name('update');
         });
 
-        Route::controller(MgtCounseling_ReportController::class)->prefix('counseling')->name('counseling.')->group(function () {
-            Route::get('/reports', 'index')->name('index');
-            Route::get('/reports/{id}', 'show')->name('detail');
-            Route::post('/reports/{id}/update', 'updateStatus')->name('updateStatus');
+        Route::prefix('managements/counseling')->name('counseling.')->group(function () {
+            Route::get('/', [MgtCounselingReportController::class, 'index'])->name('index');
+            Route::get('/reports/{id}', [MgtCounselingReportController::class, 'show'])->name('detail');
+            Route::put('/reports/{id}/update', [MgtCounselingReportController::class, 'updateStatus'])->name('updateStatus');
+            Route::get('/export', [MgtCounselingReportController::class, 'exportExcel'])->name('download'); 
         });
-        
+
+        Route::prefix('management/counseling')->name('counseling.')->group(function () {
+            Route::get('/approved', [MgtReportApprovedController::class, 'approved'])->name('approved');
+            Route::get('/approved/download', [MgtReportApprovedController ::class, 'downloadApproved'])->name('downloadApproved');
+        });
     });
 
 });
