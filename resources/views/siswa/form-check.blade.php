@@ -4,10 +4,12 @@
 
 @section('content')
 
+@include('layout.partials.head')
+@stack('styles')
+
 <style>
     body {
     background: #F5EFFF;
-    font-family: 'Arial', sans-serif;
 }
 
 .form-container {
@@ -93,7 +95,7 @@
 }
 
 .btn-secondary:hover {
-    background: #5a6268;
+    background: #BFA2DB;
 }
 
 .btn-info {
@@ -113,29 +115,30 @@
 
 /* Table Styling for Status Konseling */
 .container {
-    max-width: 900px;
-    margin: 40px auto;
     background: white;
-    padding: 20px;
+    padding: 2px 15px 1px 15px;
+    margin-top: 30px;
+    margin-bottom: 35px;
     border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 .table thead {
-    background: #17a2b8;
     color: white;
 }
-
+.table th {
+    background: #B08BBB !important;
+}
 .table th, .table td {
     padding: 10px;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd !important;
 }
 
 .table tbody tr:hover {
@@ -149,18 +152,21 @@
 }
 
 .badge-success {
-    background: #28a745;
+    background: #748E63;
     color: white;
+    border: none;
 }
 
 .badge-warning {
-    background: #ffc107;
+    background: #FFF8A6;
     color: black;
+    border: none;
 }
 
 .badge-danger {
-    background: #dc3545;
+    background: #B06161;
     color: white;
+    border: none;
 }
 
 @media (max-width: 600px) {
@@ -169,56 +175,84 @@
     }
 }
 
+@media (max-width: 480px) {
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Agar smooth saat di-scroll */
+    }
+
+    .table {
+        width: 100%;
+        min-width: 600px; /* Mencegah kolom terlalu kecil */
+    }
+
+    h3{
+        font-size: 22px;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
 </style>
 
 <x-alert />
 
-<div class="container mt-4">
-    <h4 class="text-center">Status Pengajuan Konseling</h4>
-    <p class="text-center">NIS: <strong>{{ $student->nis }}</strong> | Nama: <strong>{{ $student->nama }}</strong></p>
+<div class="container">
+    <h3 class="text-center mb-4">Status Pengajuan Konseling</h3>
+    <p class="text-start">Nama: <strong>{{ $student->nama }} </strong> <br> NIS: <strong>{{ $student->nis }}</strong></p>
 
-    @if(isset($student))
-    <h4>Hasil Pengecekan untuk: <strong>{{ $student->nama }}</strong> ({{ $student->nis }})</h4>
-@endif
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Tanggal</th>
-            <th>Guru BK</th>
-            <th>Keterangan</th>
-            <th>reason</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse($counseling_reports as $report)
-            <tr>
-                <td>{{ $report->date }}</td>
-                <td>{{ $report->teacher->name }}</td>
-                <td>{{ $report->description }}</td>
-                <td> {{ $report->reason }}</td>
-                <td>
-                    @if($report->status == 'approved')
-                        <span class="badge badge-success">Diterima</span>
-                    @elseif($report->status == 'pending')
-                        <span class="badge badge-warning">Menunggu</span>
-                    @else
-                    <span class="badge badge-danger">Ditolak</span>
-                       
-                        @endif
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="4" class="text-center">Belum ada pengajuan konseling</td>
-            </tr>
-        @endforelse
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Guru BK</th>
+                    <th>Keterangan</th>
+                    <th>Alasan</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($counseling_reports as $report)
+                    <tr>
+                        <td>{{ $report->date }}</td>
+                        <td>{{ $report->teacher->name }}</td>
+                        <td>{{ $report->description }}</td>
+                        <td> {{ $report->reason }}</td>
+                        <td>
+                            @if($report->status == 'approved')
+                                <span class="badge badge-success">Diterima</span>
+                            @elseif($report->status == 'pending')
+                                <span class="badge badge-warning">Menunggu</span>
+                            @else
+                            <span class="badge badge-danger">Ditolak</span>
+                            
+                                @endif
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center">Belum ada pengajuan konseling</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
    
-
-    <a href="{{ route('counseling.status.form') }}" class="btn btn-secondary mt-3">Cek NIS Lain</a>
+    <div class="text-end">
+        <a href="{{ route('index') }}" class="btn btn-secondary mt-3">Kembali</a>
+        <a href="{{ route('counseling.status.form') }}" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn mt-3">Buat Jadwal Baru</a>
+    </div>
 </div>
 
+@include('layout.partials.footer-scripts')
+@stack('scripts')
 @endsection

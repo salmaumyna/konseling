@@ -15,9 +15,7 @@
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
             <div class="card mb-3">
-                <div class="card-header">
-                    <h4>Detail Konseling Siswa</h4>
-                </div>
+                
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -29,7 +27,7 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="form-group mb-3 row align-items-center">
                                 <label class="col-sm-3 col-form-label"><strong>NIS</strong></label>
                                 <div class="col-sm-9">
@@ -85,7 +83,10 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <div class="text-end">
+                                        <a href="{{ route('mgt.counseling.index') }}" class="btn btn-secondary">Kembali</a>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
                                 </form>
                             @else
                                 <div class="form-group mb-3 row align-items-center">

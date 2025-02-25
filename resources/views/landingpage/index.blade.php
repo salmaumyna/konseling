@@ -221,7 +221,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 80px);
         }
 
         .hero {
@@ -276,7 +275,7 @@
                 <div class="card-header"><i class="fa-solid fa-2x fa-clipboard-check"></i></div>
                 <h3>Cek Status Izin</h3>
                 <p>Form untuk mengecek status pengajuan izin</p>
-                <a href="{{ route('counseling.nis') }}">Cek Status Pengajuan →</a>
+                <a href="{{ route('counseling.status.form') }}">Cek Status Pengajuan →</a>
             </div>
         </section>
     </main>

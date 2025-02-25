@@ -100,7 +100,7 @@
     }
 
     .btn-secondary:hover {
-        background: #5a6268;
+        background: #BFA2DB;
     }
 
     .btn-info {
@@ -140,8 +140,8 @@
                 <span class="text-danger">*<sup> wajib diisi</sup></span>
             </div>
             <div class="form-footer">
-                <a href="{{ route('counseling.status.form') }}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-info">Cek Status</button>
+                <a href="{{ route('index') }}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Cek Status</button>
             </div> 
         </form>
     </div>

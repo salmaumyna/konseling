@@ -70,6 +70,9 @@
     .btn-primary:hover {
         background: #138496;
     }
+    .btn-secondary:hover {
+        background: #BFA2DB;
+    }
 
     .text-danger {
         color: #BB5A5A;
