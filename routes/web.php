@@ -95,17 +95,17 @@ Route::middleware(Authenticate::class)->group(function () {
             Route::put('/', 'update')->name('update');
         });
 
-        Route::prefix('managements/counseling')->name('counseling.')->group(function () {
+        Route::prefix('managements/counseling')->prefix('counseling')->name('counseling.')->group(function () {
             Route::get('/', [MgtCounselingReportController::class, 'index'])->name('index');
             Route::get('/reports/{id}', [MgtCounselingReportController::class, 'show'])->name('detail');
             Route::put('/reports/{id}/update', [MgtCounselingReportController::class, 'updateStatus'])->name('updateStatus');
             Route::get('/export', [MgtCounselingReportController::class, 'exportExcel'])->name('download'); 
         });
 
-        Route::prefix('management/counseling')->name('counseling.')->group(function () {
-            Route::get('/approved', [MgtReportApprovedController::class, 'approved'])->name('approved');
-            Route::get('/approved/download', [MgtReportApprovedController ::class, 'downloadApproved'])->name('downloadApproved');
-        });
+        Route::controller(MgtReportApprovedController::class)->prefix('approved')->name('counseling.')->group(function () {
+        Route::get('/', 'approved')->name('approved');
+        Route::get('/download', 'downloadApproved')->name('downloadApproved');
+    });
     });
 
 });
