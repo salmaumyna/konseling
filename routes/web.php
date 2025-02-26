@@ -102,10 +102,10 @@ Route::middleware(Authenticate::class)->group(function () {
             Route::get('/export', [MgtCounselingReportController::class, 'exportExcel'])->name('download'); 
         });
 
-        Route::prefix('management/counseling')->name('counseling.')->group(function () {
-            Route::get('/approved', [MgtReportApprovedController::class, 'approved'])->name('approved');
-            Route::get('/approved/download', [MgtReportApprovedController ::class, 'downloadApproved'])->name('downloadApproved');
-        });
+        Route::controller(MgtReportApprovedController::class)->prefix('approved')->name('counseling.')->group(function () {
+        Route::get('/', 'approved')->name('approved');
+        Route::get('/download', 'downloadApproved')->name('downloadApproved');
+    });
     });
 
 });

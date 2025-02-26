@@ -37,6 +37,12 @@ $sidebarItems = [
         "url" => "/managements/counseling",
         "levels" => ["teacher", "admin"]
     ],
+    [
+        "title" => "Laporan Selesai",
+        "icon" => "fa fa-building",
+        "url" => "/managements/approved",
+        "levels" => ["admin"]
+    ],
     
     [
         "title" => "Pengaturan Akun",
