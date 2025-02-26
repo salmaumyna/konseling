@@ -152,8 +152,8 @@
 }
 
 .badge-success {
-    background: #748E63;
-    color: white;
+    background: #C8E4B2;
+    color: black;
     border: none;
 }
 
@@ -164,8 +164,8 @@
 }
 
 .badge-danger {
-    background: #B06161;
-    color: white;
+    background: #FF9F9F;
+    color: black;
     border: none;
 }
 
@@ -249,8 +249,7 @@
    
     <div class="text-end">
         <a href="{{ route('index') }}" class="btn btn-secondary mt-3">Kembali</a>
-        <a href="{{ route('counseling.status.form') }}" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn mt-3">Buat Jadwal Baru</a>
-    </div>
+        </div>
 </div>
 
 @include('layout.partials.footer-scripts')
