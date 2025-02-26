@@ -8,29 +8,16 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class CounselingReportExport implements FromCollection, WithHeadings, WithMapping
 {
-    protected $nis, $status;
+    protected $counselingReports;
 
-    public function __construct($nis, $status)
+    public function __construct($counselingReports)
     {
-        $this->nis = $nis;
-        $this->status = $status;
+        $this->counselingReports = $counselingReports;
     }
 
     public function collection()
     {
-        $query = CounselingReport::with(['student', 'class', 'major'])->orderBy('date', 'desc');
-
-        if ($this->nis) {
-            $query->whereHas('student', function ($q) {
-                $q->where('nis', 'like', '%' . $this->nis . '%');
-            });
-        }
-
-        if ($this->status) {
-            $query->where('status', $this->status);
-        }
-
-        return $query->get();
+        return $this->counselingReports;
     }
 
     public function headings(): array
@@ -38,18 +25,18 @@ class CounselingReportExport implements FromCollection, WithHeadings, WithMappin
         return ['NIS', 'Nama Siswa', 'Kelas', 'Jurusan', 'Tanggal', 'Guru BK', 'Status', 'Deskripsi', 'Alasan Penolakan'];
     }
 
-    public function map($counselingReport): array
+    public function map($counselingReports): array
     {
         return [
-            $counselingReport->student->nis,
-            $counselingReport->student->nama,
-            $counselingReport->class->name ?? '-',
-            $counselingReport->major->name ?? '-',
-            $counselingReport->date,
-            $counselingReport->teacher->name ?? '-',
-            ucfirst($counselingReport->status),
-            $counselingReport->description,
-            $counselingReport->reason ?? '-',
+            $counselingReports->student->nis,
+            $counselingReports->student->nama,
+            $counselingReports->class->name ?? '-',
+            $counselingReports->major->name ?? '-',
+            $counselingReports->date,
+            $counselingReports->teacher->name ?? '-',
+            $counselingReports->status == 'approved' ? 'Disetujui' : ($counselingReports->status == 'pending' ? 'Menunggu' : 'Ditolak'),
+            $counselingReports->description,
+            $counselingReports->reason ?? '-',
         ];
     }
 }

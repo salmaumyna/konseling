@@ -11,29 +11,78 @@
         @slot('li_2') Laporan @endslot
     @endcomponent
 
+    <style>
+    .form-control {
+        height: 38px; 
+    }
+    .badge {
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+    .bg-success {
+        background: #C8E4B2 !important;
+        color: black;
+        border: none;
+    }
+
+    .bg-warning {
+        background: #FFF8A6 !important;
+        color: black;
+        border: none;
+    }
+
+    .bg-danger {
+        background: #FF9F9F !important;
+        color: black;
+        border: none;
+    }
+    
+    @media (max-width: 480px){
+        .form-label {
+            font-size: 14px;
+        }
+        .form-control {
+            margin-bottom: 5px;
+        }
+        .btn {
+            margin: 5px;
+            padding: 12px !important;
+        }
+        i {
+            font-size : 15px !important;
+        }
+    }
+    </style>
+
     <x-alert />
 
     <form method="GET" action="{{ route('mgt.counseling.index') }}" class="mb-3">
-        <div class="row">
-            <div class="col-md-4">
-                <label for="nis" class="form-label">NIS</label>
-                <input type="text" name="nis" id="nis" class="form-control" value="{{ request('nis') }}" placeholder="Cari berdasarkan NIS">
+        <div class="row align-items-center">
+            <div class="col-md-1">
+                <label for="nis" class="form-label">NIS:</label>
             </div>
             <div class="col-md-4">
-                <label for="status" class="form-label">Status</label>
-                <select name="status" id="status" class="form-control">
+                <input type="text" name="nis" id="nis" class="form-control" value="{{ request('nis') }}" placeholder="Cari berdasarkan NIS">
+            </div>
+            <div class="col-md-1">
+                <label for="status" class="form-label">Status:</label>
+            </div>
+            <div class="col-md-4">
+                <select name="status" id="status" class="js-example-basic-single form-control">
                     <option value="">Semua Status</option>
                     <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu</option>
                     <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Disetujui</option>
                     <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Ditolak</option>
                 </select>
             </div>
-            <div class="row mt-3">
-                <div class="col-md-12 d-flex">
-                    <button type="submit" class="btn btn-primary me-2">Filter</button>
-                    <a href="{{ route('mgt.counseling.index') }}" class="btn btn-secondary me-2">Reset</a>
-                    <a href="{{ route('mgt.counseling.download', request()->all()) }}" class="btn btn-success">Download Excel</a>
-                </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-12 d-flex">
+                <button type="submit" class="btn btn-primary me-2"><i class="fa fa-search"></i> Search</button>
+                <a href="{{ route('mgt.counseling.index') }}" class="btn btn-secondary me-2"><i class="fa fa-refresh"></i> Reset</a>
+                <button type="submit" name="action" value="download" class="btn btn-success">Download Excel</button> 
             </div>
         </div>
     </form>
