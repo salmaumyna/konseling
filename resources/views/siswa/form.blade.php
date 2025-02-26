@@ -93,22 +93,22 @@
 
             <div class="form-group">
                 <label>NIS</label>
-                <input type="text" class="form-control" value="{{ $student->nis }}" readonly>
+                <input type="text" class="form-control" value="{{ $student->nis }}" disabled readonly>
             </div>
 
             <div class="form-group">
                 <label>Nama</label>
-                <input type="text" class="form-control" value="{{ $student->nama }}" readonly>
+                <input type="text" class="form-control" value="{{ $student->nama }}" disabled readonly>
             </div>
 
             <div class="form-group">
                 <label>Kelas</label>
-                <input type="text" class="form-control" value="{{ $student->kelas->name ?? '-' }}" readonly>
+                <input type="text" class="form-control" value="{{ $student->kelas->name ?? '-' }}" disabled readonly>
             </div>
 
             <div class="form-group">
                 <label>Jurusan</label>
-                <input type="text" class="form-control" value="{{ $student->major->name ?? '-' }}" readonly>
+                <input type="text" class="form-control" value="{{ $student->major->name ?? '-' }}" disabled readonly>
             </div>
 
             <div class="form-group">
