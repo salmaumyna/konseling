@@ -77,12 +77,10 @@
                         <div class="form-group">
                               <label>Hak Akses <span class="text-danger">*</span></label>
                               <div class="col-sm-12">
-                                  <select class="js-example-basic-single" style="width:100%" name="levels">
-                                      <option disabled selected>Pilih Hak Akses</option>
-                                      <option value="admin" {{ old('levels') }}>Pengelola</option>
-                                      <option value="employee" {{ old('levels') }}>Pegawai
-                                      </option>
-                                  </select>
+                                <select class="js-example-basic-multiple" name="levels[]" multiple="multiple" style="width:100%">
+                                    <option value="admin">Pengelola</option>
+                                    <option value="teacher">Pegawai</option>
+                                </select>
                                 @if ($errors->has('levels'))
                                     <span class="text-danger">{{ $errors->first('levels') }}</span>
                                 @endif
