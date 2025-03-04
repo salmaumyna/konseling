@@ -59,7 +59,6 @@
                                 </div>
                             </div>
 
-                           
                             @if($report->status === 'pending')
                                 <form action="{{ route('mgt.counseling.updateStatus', $report->id) }}" method="POST">
                                     @csrf
@@ -68,7 +67,7 @@
                                     <div class="form-group mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label"><strong>Ubah Status</strong></label>
                                         <div class="col-sm-9">
-                                            <select name="status" id="status" class="form-control js-example-basic-single" required>
+                                            <select name="status" id="status" class="form-control" required>
                                                 <option value="">-- Pilih Status --</option>
                                                 <option value="approved">Disetujui</option>
                                                 <option value="rejected">Ditolak</option>
@@ -79,8 +78,13 @@
                                     <div class="form-group mb-3 row align-items-center d-none" id="reasonDiv">
                                         <label class="col-sm-3 col-form-label"><strong>Alasan Penolakan</strong></label>
                                         <div class="col-sm-9">
-                                        <textarea name="reason" id="reason" class="form-control" placeholder="Masukkan Alasan" autofocus></textarea>
+                                            <textarea name="reason" id="reason" class="form-control" placeholder="Masukkan Alasan"></textarea>
                                         </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <a href="{{ route('mgt.counseling.index') }}" class="btn btn-secondary">Kembali</a>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </form>
                             @else
@@ -96,19 +100,11 @@
                                     <div class="form-group mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label"><strong>Alasan Penolakan</strong></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" value="{{ $report->reason }}" >
+                                            <input type="text" class="form-control" value="{{ $report->reason }}" readonly>
                                         </div>
                                     </div>
-
                                 @endif
                             @endif
-                            <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ route('mgt.counseling.index') }}" class="btn btn-secondary">Kembali</a>
-                                @if($report->status === 'pending')
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                @endif
-                            </div>
-
                         </div>
 
                         <div class="col-md-4 text-center">
@@ -123,17 +119,23 @@
     </div>
 
     <script>
-        document.getElementById('status').addEventListener('change', function () {
+        document.addEventListener("DOMContentLoaded", function () {
+            let statusSelect = document.getElementById('status');
             let reasonDiv = document.getElementById('reasonDiv');
-            let declineReason = document.getElementById('reason');
+            let reasonInput = document.getElementById('reason');
 
-            if (this.value === 'rejected') {
-                reasonDiv.classList.remove('d-none');
-                declineReason.setAttribute('required', 'true');
-            } else {
-                reasonDiv.classList.add('d-none');
-                declineReason.removeAttribute('required');
+            function toggleReasonField() {
+                if (statusSelect.value === 'rejected') {
+                    reasonDiv.classList.remove('d-none');
+                    reasonInput.setAttribute('required', 'true');
+                } else {
+                    reasonDiv.classList.add('d-none');
+                    reasonInput.removeAttribute('required');
+                    reasonInput.value = ''; // Bersihkan input alasan jika bukan ditolak
+                }
             }
+
+            statusSelect.addEventListener('change', toggleReasonField);
         });
     </script>
 @endsection

@@ -64,7 +64,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->username }}</td>
-                                                <td>{{ $user->levels == 'admin' ? 'Pengelola' : 'Guru' }}</td>
+                                                <td>{{ str_replace(['admin', 'teacher'], ['Pengelola', 'Guru'], implode(', ', explode(',', $user->levels))) }}</td>
                                                 <td class="text-end">
                                                     @if($isActive)
                                                         <a href="{{ route('mgt.user.edit', $user->id) }}"

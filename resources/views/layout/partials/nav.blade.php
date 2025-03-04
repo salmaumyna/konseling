@@ -3,7 +3,7 @@ $sidebarItems = [
     [
         "title" => "Dashboard",
         "icon" => "fa fa-tachometer",
-        "url" => "  /managements/dashboard",
+        "url" => "/managements/dashboard",
         "levels" => ["admin", "teacher"]
     ],
     [
@@ -30,7 +30,6 @@ $sidebarItems = [
         "url" => "/managements/students",
         "levels" => ["admin"]
     ],
-
     [
         "title" => "Laporan Konseling",
         "icon" => "fa fa-pencil-square-o",
@@ -43,7 +42,6 @@ $sidebarItems = [
         "url" => "/managements/approved",
         "levels" => ["admin"]
     ],
-    
     [
         "title" => "Pengaturan Akun",
         "icon" => "fa fa-cog",
@@ -59,17 +57,17 @@ $sidebarItems = [
         ],
         "levels" => ["admin", "teacher"]
     ]
-    
 ];
 
-function renderSidebar($items, $userLevel) {
+function renderSidebar($items, $userLevels) {
     $currentPath = $_SERVER['REQUEST_URI'];
 
     echo '<nav class="sidebar sidebar-offcanvas" id="sidebar">';
     echo '<ul class="nav">';
 
     foreach ($items as $item) {
-        if (isset($item['levels']) && !in_array($userLevel, $item['levels'])) {
+        // Cek apakah ada minimal satu level yang cocok
+        if (!empty($item['levels']) && empty(array_intersect($userLevels, $item['levels']))) {
             continue;
         }
 
@@ -99,8 +97,7 @@ function renderSidebar($items, $userLevel) {
             echo '</div>';
         } 
         else {
-            $target = isset($item['target']) ? ' target="' . $item['target'] . '"' : '';
-            echo '<a class="nav-link" href="' . $item['url'] . '"' . $target . '>';
+            echo '<a class="nav-link" href="' . $item['url'] . '">';
             echo '<span class="menu-title">' . $item['title'] . '</span>';
             echo '<i class="' . $item['icon'] . ' menu-icon"></i>';
             echo '</a>';
@@ -113,6 +110,17 @@ function renderSidebar($items, $userLevel) {
     echo '</nav>';
 }
 
-$userLevel = auth()->user()->levels; 
-renderSidebar($sidebarItems, $userLevel);
+// Ambil level user dari database
+$userLevels = auth()->user()->levels;
+
+// Jika `levels` berupa string biasa (misal: "admin,teacher"), ubah menjadi array
+if (is_string($userLevels)) {
+    $userLevels = explode(',', $userLevels);
+} 
+// Jika hanya satu level, ubah ke array agar tetap bisa dicek dengan array_intersect()
+elseif (!is_array($userLevels)) {
+    $userLevels = [$userLevels];
+}
+
+renderSidebar($sidebarItems, $userLevels);
 ?>

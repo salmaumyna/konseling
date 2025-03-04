@@ -78,12 +78,10 @@
                           <div class="form-group">
                               <label>Hak Akses <span class="text-danger">*</span></label>
                               <div class="col-sm-12">
-                                  <select class="js-example-basic-single" style="width:100%" name="levels">
-                                      <option disabled>Pilih Hak Akses</option>
-                                      <option value="admin" @if (old('levels', $user->levels) == "admin") selected @endif>Pengelola</option>
-                                      <option value="employee" @if (old('is_active', $user->levels) == "employee") selected @endif>Pegawai
-                                      </option>
-                                  </select>
+                                <select class="js-example-basic-multiple" name="levels[]" multiple="multiple" style="width:100%">
+                                    <option value="admin" {{ in_array('admin', explode(',', $user->levels)) ? 'selected' : '' }}>Pengelola</option>
+                                    <option value="employee" {{ in_array('teacher', explode(',', $user->levels)) ? 'selected' : '' }}>Pegawai</option>
+                                </select>
                                   @if ($errors->has('levels'))
                                     <span class="text-danger">{{ $errors->first('levels') }}</span>
                                   @endif

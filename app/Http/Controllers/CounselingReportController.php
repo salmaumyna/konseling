@@ -31,8 +31,8 @@ class CounselingReportController extends Controller
 
     public function showForm($nis)
     {
-        $student = Student::where('nis', $nis)->firstOrFail(); // Tetap pakai nis untuk pencarian
-        $teachers = User::where('levels', 'teacher')->get();
+        $student = Student::where('nis', $nis)->firstOrFail();
+        $teachers = User::where('levels', 'LIKE', '%teacher%')->get();
 
         if ($teachers->isEmpty()) {
             return redirect()->route('counseling.nis')->with('error', 'Belum ada guru BK yang tersedia.');

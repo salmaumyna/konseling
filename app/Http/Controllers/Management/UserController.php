@@ -45,7 +45,7 @@ class UserController extends Controller
             'name'      => 'required|max:255',
             'username'  => 'required|alpha_num:ascii|min:5|max:255',
             'password'  => 'required|confirmed|min:3|max:255',
-            'levels' => 'required|min:1',
+            'levels'    => 'required|array|min:1',
             'is_active' => 'required|boolean'
         ],[
             'name.required'         => 'Nama harus diisi!',
@@ -78,7 +78,8 @@ class UserController extends Controller
             'username'  => $request->username,
             'password'  => bcrypt($request->password),
             'is_active' => true,
-            'levels'    => $request->levels,
+            'levels'    => implode(',', $request->levels),
+        
         ]);
 
 
@@ -95,49 +96,43 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
-        $user = User::find($id);
-        abort_if(!$user, 400, 'Pengguna tidak ditemukan');
-
+        $user = User::findOrFail($id);
+    
         $request->validate([
-            'username' => 'required|alpha_num:ascii|min:5|max:255',
-            'password' => 'nullable|confirmed|min:3|max:255',
+            'username'  => 'required|alpha_num:ascii|min:5|max:255|unique:users,username,' . $id,
+            'password'  => 'nullable|confirmed|min:3|max:255',
             'is_active' => 'required|boolean',
-            'levels' => 'required|min:2',
+            'levels' => 'required|array|min:1',
         ], [
-            'username.required' => 'Username harus diisi!',
-            'username.max' => 'Maksimal 255 karakter!',
+            'username.required'     => 'Username harus diisi!',
+            'username.max'          => 'Maksimal 255 karakter!',
             'username.alpha_num'    => 'Username hanya boleh diisi karakter A-Z a-z 0-9!',
-            'password.max' => 'Maksimal 255 karakter!',
-            'username.min' => 'Minimal 5 karakter!',
-            'password.min' => 'Minimal 3 karakter!',
-            'password.confirmed' => 'Password dan Password konfirmasi tidak sama!',
-            'is_active.request' => 'Status harus diisi!',
-            'is_active.boolean' => 'Status hanya boleh diisi aktif / tidak aktif!',
+            'password.max'          => 'Maksimal 255 karakter!',
+            'username.min'          => 'Minimal 5 karakter!',
+            'password.min'          => 'Minimal 3 karakter!',
+            'password.confirmed'    => 'Password dan Password konfirmasi tidak sama!',
+            'is_active.required'    => 'Status harus diisi!',
+            'is_active.boolean'     => 'Status hanya boleh diisi aktif / tidak aktif!',
             'levels.required'       => 'Level harus dipilih!',
-            'levels.min'            => 'Level harus dipilih!',
+            'levels.min'            => 'Minimal harus memilih 1 level!',
         ]);
-
-        $otherUser = User::where('username', $request->username)->where('id', '!=', $user->id)->withTrashed()->first();
-        if ($otherUser) {
-            if ($otherUser->deleted_at) {
-                return back()->withInput()->withError('Username telah digunakan oleh akun lain yang telah dihapus!');
-            }
-            return back()->withInput()->withError('Username telah digunakan oleh akun lain!');
-        }
-
-        $user->is_active = $request->is_active;
-        $user->username = $request->username;
-        $user->name = $request->name;
-        $user->levels = $request->levels;
-
+    
+        $user->update([
+            'username'  => $request->username,
+            'name'      => $request->name,
+            'is_active' => $request->is_active,
+            'levels' => implode(',', $request->levels), 
+        ]);
+    
         if ($request->password) {
-            $user->password = bcrypt($request->password);
+            $user->update([
+                'password' => bcrypt($request->password),
+            ]);
         }
-
-        $user->save();
-
+    
         return redirect()->route('mgt.user.index')->withSuccess('Pengguna berhasil diubah!');
     }
+    
 
     public function activate($id)
     {
