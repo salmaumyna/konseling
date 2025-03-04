@@ -39,7 +39,7 @@ $sidebarItems = [
     ],
     [
         "title" => "Laporan Selesai",
-        "icon" => "fa fa-building",
+        "icon" => "fa fa-check-square-o",
         "url" => "/managements/approved",
         "levels" => ["admin"]
     ],

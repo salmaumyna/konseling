@@ -53,6 +53,8 @@ class CounselingReportController extends Controller
         ], [
             'date.after_or_equal' => 'Tanggal konseling tidak boleh di masa lalu.',
             'description.required' => 'Alasan wajib diisi.',
+            'teacher_id.required' => 'Guru wajib diisi.',
+            'date.required' => 'Tanggal wajib diisi.',
         ]);
 
         CounselingReport::create([
