@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Management;
 use App\Http\Controllers\Controller;
 use App\Models\ClassModel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ClassesController extends Controller
 {
@@ -27,21 +28,24 @@ class ClassesController extends Controller
         );
     }
 
-    // Menampilkan form untuk membuat tingkat baru
     public function create()
     {
         return view('management.classes.create');
     }
 
-    // Menyimpan data tingkat baru
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
+            'name' => [
+                'required',
+                'max:255',
+                Rule::unique('classes', 'name'),
+            ],
             'is_active' => 'required|boolean',
         ], [
             'name.required' => 'Nama tingkat harus diisi!',
             'name.max' => 'Nama tingkat maksimal 255 karakter!',
+            'name.unique' => 'Nama tingkat sudah digunakan!',
             'is_active.required' => 'Status harus diisi!',
             'is_active.boolean' => 'Status hanya boleh diisi dengan nilai boolean (true/false)!',
         ]);
@@ -54,7 +58,6 @@ class ClassesController extends Controller
         return redirect()->route('mgt.classes.index')->withSuccess('tingkat berhasil ditambahkan!');
     }
 
-    // Menampilkan form untuk mengedit tingkat
     public function edit($id)
     {
         $class = ClassModel::find($id);
@@ -63,18 +66,22 @@ class ClassesController extends Controller
         return view('management.classes.edit', compact('class'));
     }
 
-    // Mengupdate data tingkat
     public function update($id, Request $request)
     {
         $class = ClassModel::find($id);
         abort_if(!$class, 400, 'tingkat tidak ditemukan');
 
         $request->validate([
-            'name' => 'required|max:255',
+            'name' => [
+                'required',
+                'max:255',
+                Rule::unique('classes', 'name')->ignore($id),
+            ],
             'is_active' => 'required|boolean',
         ], [
             'name.required' => 'Nama tingkat harus diisi!',
             'name.max' => 'Nama tingkat maksimal 255 karakter!',
+            'name.unique' => 'Nama tingkat sudah digunakan!',
             'is_active.required' => 'Status harus diisi!',
             'is_active.boolean' => 'Status hanya boleh diisi dengan nilai boolean (true/false)!',
         ]);
@@ -87,7 +94,6 @@ class ClassesController extends Controller
         return redirect()->route('mgt.classes.index')->withSuccess('tingkat berhasil diperbarui!');
     }
 
-    // Mengaktifkan tingkat
     public function activate($id)
     {
         $class = ClassModel::find($id);
@@ -99,7 +105,6 @@ class ClassesController extends Controller
         return redirect()->route('mgt.classes.index', ['view' => 'active'])->withSuccess('tingkat berhasil diaktifkan!');
     }
 
-    // Menonaktifkan tingkat
     public function inactivate($id)
     {
         $class = ClassModel::find($id);
@@ -111,7 +116,6 @@ class ClassesController extends Controller
         return redirect()->route('mgt.classes.index', ['view' => 'inactive'])->withSuccess('tingkat berhasil dinonaktifkan!');
     }
 
-    // Menghapus tingkat
     public function remove($id)
     {
         $class = ClassModel::find($id);

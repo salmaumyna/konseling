@@ -24,7 +24,7 @@ class CounselingStatusController extends Controller
     // Ambil data pengajuan konseling milik siswa ini
     $counseling_reports = CounselingReport::where('student_id', $student->id)
         ->with(['teacher'])
-        ->orderBy('date', 'desc')
+        ->orderBy('created_at', 'desc')
         ->get();
 
     return view('siswa.form-check', compact('student', 'counseling_reports'));

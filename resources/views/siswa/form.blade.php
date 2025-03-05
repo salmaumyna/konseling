@@ -88,8 +88,8 @@
         <form action="{{ route('counseling.submit') }}" method="post">
             @csrf
             <input type="hidden" name="student_id" value="{{ $student->id }}">
-            <input type="hidden" name="class_id" value="{{ $student->nama_kelas }}">
-            <input type="hidden" name="major_id" value="{{ $student->tingkat }}">
+            <input type="hidden" name="class_id" value="{{ $student->kelas->id }}">
+            <input type="hidden" name="major_id" value="{{ $student->major->id }}">
 
             <div class="form-group">
                 <label>NIS</label>
@@ -110,6 +110,7 @@
                 <label>Jurusan</label>
                 <input type="text" class="form-control" value="{{ $student->major->name ?? '-' }}" disabled readonly>
             </div>
+
 
             <div class="form-group">
                 <label>Guru BK <span class="text-danger">*</span></label>

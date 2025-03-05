@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ClassModel extends Model
 {
     use HasFactory;
+
     protected $table = 'classes';
-    protected $fillable = ['name'];
-    
+    protected $fillable = 
+    ['name',
+     'is_active']; 
+
+
 }

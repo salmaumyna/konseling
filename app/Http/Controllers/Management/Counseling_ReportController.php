@@ -15,8 +15,9 @@ class Counseling_ReportController extends Controller
     {
         $user = Auth::user()->id;
 
-        $query = CounselingReport::with(['student', 'class', 'major'])->orderBy('date', 'desc')->where('teacher_id', $user);
-
+        $query = CounselingReport::with(['student', 'class', 'major'])
+        ->orderBy('created_at', 'desc') 
+        ->where('teacher_id', $user);
         // Filter berdasarkan NIS
         if ($request->filled('nis')) {
             $query->whereHas('student', function ($q) use ($request) {
