@@ -250,7 +250,7 @@
                 <h1 class="sitename">Bimbingan Konseling</h1>
             </a>
         </div>
-        <a class="btn-login" href="{{ route('login') }}">Login</a>
+        <a class="btn-login" href="{{ route('about') }}">About</a> <a class="btn-login" href="{{ route('login') }}">Login</a>
     </header>
 
     <!-- Hero Section -->

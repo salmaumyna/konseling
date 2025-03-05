@@ -207,52 +207,53 @@
 <x-alert />
 
 <div class="container">
-    <h3 class="text-center mb-4">Status Pengajuan Konseling</h3>
-    <p class="text-start">Nama: <strong>{{ $student->nama }} </strong> <br> NIS: <strong>{{ $student->nis }}</strong></p>
+        <h3 class="text-center mb-4">Status Pengajuan Konseling</h3>
+        <p class="text-start">Nama: <strong>{{ $student->nama }} </strong> <br> NIS: <strong>{{ $student->nis }}</strong></p>
 
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Tanggal</th>
-                    <th>Guru BK</th>
-                    <th>Keterangan</th>
-                    <th>Alasan</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($counseling_reports as $report)
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ $report->date }}</td>
-                        <td>{{ $report->teacher->name }}</td>
-                        <td>{{ $report->description }}</td>
-                        <td> {{ $report->reason }}</td>
-                        <td>
-                            @if($report->status == 'approved')
-                                <span class="badge badge-success">Diterima</span>
-                            @elseif($report->status == 'pending')
-                                <span class="badge badge-warning">Menunggu</span>
-                            @else
-                            <span class="badge badge-danger">Ditolak</span>
-                            
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Guru BK</th>
+                        <th>Keterangan</th>
+                        <th>Alasan</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($counseling_reports as $index => $report)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $report->date }}</td>
+                            <td>{{ $report->teacher->name }}</td>
+                            <td>{{ $report->description }}</td>
+                            <td>{{ $report->reason ? $report->reason : '-' }}</td>
+                            <td>
+                                @if($report->status == 'approved')
+                                    <span class="badge badge-success">Diterima</span>
+                                @elseif($report->status == 'pending')
+                                    <span class="badge badge-warning">Menunggu</span>
+                                @else
+                                    <span class="badge badge-danger">Ditolak</span>
                                 @endif
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="text-center">Belum ada pengajuan konseling</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-   
-    <div class="text-end">
-        <a href="{{ route('index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">Belum ada pengajuan konseling</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-</div>
 
-@include('layout.partials.footer-scripts')
-@stack('scripts')
+        <div class="text-end">
+            <a href="{{ route('index') }}" class="btn btn-secondary mt-3">Kembali</a>
+        </div>
+    </div>
+
+    @include('layout.partials.footer-scripts')
+    @stack('scripts')
 @endsection

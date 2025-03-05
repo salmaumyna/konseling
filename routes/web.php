@@ -29,6 +29,7 @@ use App\Http\Controllers\Management\StudentsController as MgtStudentsController;
 |
 */
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
+Route::get('/about', [LandingPageController::class, 'about'])->name('about');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.process');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
