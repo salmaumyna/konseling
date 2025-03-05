@@ -19,21 +19,28 @@ class CounselingReportController extends Controller
     public function processNis(Request $request)
     {
         $request->validate([
-            'nis' => 'required|numeric|exists:students,nis',
+            'nis' => [
+                'required',
+                'numeric',
+                Rule::exists('students', 'nis')->where(fn ($query) => $query->where('is_active', 1))
+            ],
         ], [
             'nis.required' => 'NIS wajib diisi!',
             'nis.numeric' => 'NIS harus berupa angka!',
-            'nis.exists' => 'NIS tidak ditemukan!',
+            'nis.exists' => 'NIS tidak ditemukan atau siswa tidak aktif!',
         ]);
-
+        
         return redirect()->route('counseling.form', ['nis' => $request->nis]);
+        
     }
+    
 
     public function showForm($nis)
     {
-        $student = Student::where('nis', $nis)->firstOrFail();
-        $teachers = User::where('levels', 'LIKE', '%teacher%')->get();
-
+         $student = Student::where('nis', $nis)->firstOrFail();
+    $teachers = User::where('levels', 'LIKE', '%teacher%')
+                    ->where('is_active', '1') // Hanya guru yang aktif
+                    ->get();
         if ($teachers->isEmpty()) {
             return redirect()->route('counseling.nis')->with('error', 'Belum ada guru BK yang tersedia.');
         }
@@ -53,8 +60,6 @@ class CounselingReportController extends Controller
         ], [
             'date.after_or_equal' => 'Tanggal konseling tidak boleh di masa lalu.',
             'description.required' => 'Alasan wajib diisi.',
-            'teacher_id.required' => 'Guru wajib diisi.',
-            'date.required' => 'Tanggal wajib diisi.',
         ]);
 
         CounselingReport::create([
@@ -67,6 +72,6 @@ class CounselingReportController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect()->route('counseling.nis')->withSuccess('Pengajuan berhasil dikirim!');
+        return redirect()->route('counseling.nis')->with('success', 'Pengajuan berhasil dikirim!');
     }
 }

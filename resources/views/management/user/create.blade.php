@@ -79,7 +79,7 @@
                               <div class="col-sm-12">
                                 <select class="js-example-basic-multiple" name="levels[]" multiple="multiple" style="width:100%">
                                     <option value="admin">Pengelola</option>
-                                    <option value="teacher">Pegawai</option>
+                                    <option value="teacher">Guru</option>
                                 </select>
                                 @if ($errors->has('levels'))
                                     <span class="text-danger">{{ $errors->first('levels') }}</span>

@@ -13,7 +13,7 @@
             Pengguna
         @endslot
         @slot('li_2')
-            Daftar
+            Daftar Pengguna
         @endslot
         @slot('action_button')
             <a href="{{ route('mgt.user.create') }}" class="btn btn-gradient-primary">

@@ -13,7 +13,7 @@
             Siswa
         @endslot
         @slot('li_2')
-            Daftar
+            Daftar Siswa
         @endslot
         @slot('action_button')
             <a href="{{ route('mgt.students.create') }}" class="btn btn-gradient-primary">

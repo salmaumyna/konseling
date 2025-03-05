@@ -8,7 +8,8 @@
 @stack('styles')
 <style>
     body {
-        background: #F4EEFF;
+        background: url('/assets/img/bg-nis.png') no-repeat center center fixed;
+        background-size: cover;
     }
 
     .form-container {

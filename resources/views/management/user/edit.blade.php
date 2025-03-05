@@ -80,7 +80,7 @@
                               <div class="col-sm-12">
                                 <select class="js-example-basic-multiple" name="levels[]" multiple="multiple" style="width:100%">
                                     <option value="admin" {{ in_array('admin', explode(',', $user->levels)) ? 'selected' : '' }}>Pengelola</option>
-                                    <option value="employee" {{ in_array('teacher', explode(',', $user->levels)) ? 'selected' : '' }}>Pegawai</option>
+                                    <option value="teacher" {{ in_array('teacher', explode(',', $user->levels)) ? 'selected' : '' }}>Guru</option>
                                 </select>
                                   @if ($errors->has('levels'))
                                     <span class="text-danger">{{ $errors->first('levels') }}</span>

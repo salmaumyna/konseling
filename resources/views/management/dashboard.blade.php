@@ -20,11 +20,17 @@ Beranda
 @endslot
 @endcomponent
 
+<style>
+    label {
+        margin-bottom: 10px;
+    }
+</style>
+
 <x-alert />
 <div class="row">
-    <div class="col-md-4">
-        <label for="year">Tahun</label>
-        <select id="year" name="year" class="form-control">
+    <div class="col-md-4 d-flex align-items-center">
+        <label for="year" class="me-3">Tahun :</label>
+        <select id="year" name="year" class="form-control js-example-basic-multiple w-50">
             @for ($i = date('Y'); $i >= 2020; $i--)
                 <option value="{{ $i }}" {{ $i == $year ? 'selected' : '' }}>{{ $i }}</option>
             @endfor
@@ -50,14 +56,25 @@ Beranda
 
         console.log("Data Approved:", approved); // Debugging: lihat data di console browser
 
+        // Mendapatkan konteks canvas
+        const ctx = document.getElementById('counselingChart').getContext('2d');
+
+        // Membuat gradient untuk efek warna yang lebih menarik
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(40, 167, 69, 0.8)');
+        gradient.addColorStop(1, 'rgba(40, 167, 69, 0.3)');
+
         const data = {
             labels: labels,
             datasets: [{
                 label: 'Disetujui',
                 data: approved,
-                backgroundColor: 'rgba(40, 167, 69, 0.5)',
+                backgroundColor: gradient,
                 borderColor: 'rgb(40, 167, 69)',
                 borderWidth: 2,
+                borderRadius: 8, // Membuat sudut bar lebih melengkung
+                hoverBackgroundColor: 'rgba(40, 167, 69, 1)', // Warna saat dihover
+                hoverBorderColor: 'rgb(30, 140, 60)', // Border saat dihover
             }]
         };
 
@@ -67,18 +84,51 @@ Beranda
             options: {
                 responsive: true,
                 plugins: {
-                    legend: { position: 'top' },
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: { size: 14, weight: 'bold', fontfamily: 'Nunito' },
+                            color: '#333'
+                        }
+                    },
                     title: {
                         display: true,
                         text: 'Grafik Konseling Siswa ' + '{{ $year }}',
-                        font: { size: 18 }
+                        font: { size: 20, fontfamily: 'Nunito', weight: 'bold' },
+                        color: '#222'
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: { size: 14, fontfamily: 'Nunito', weight: 'bold' },
+                        bodyFont: { size: 12 },
+                        bodySpacing: 6,
+                        padding: 10,
+                        cornerRadius: 6,
+                        boxShadow: '2px 2px 10px rgba(0,0,0,0.2)', // Efek bayangan tooltip
                     }
                 },
-                scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 12, fontfamily: 'Nunito' }, color: '#444' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            font: { size: 12 },
+                            color: '#444'
+                        },
+                        grid: { color: 'rgba(200, 200, 200, 0.2)' } // Grid lebih soft
+                    }
+                },
+                animation: {
+                    duration: 1500,
+                    easing: 'easeOutBounce'
+                }
             }
         };
 
-        const ctx = document.getElementById('counselingChart');
         if (ctx) {
             new Chart(ctx, config);
         } else {
@@ -86,7 +136,6 @@ Beranda
         }
     });
 </script>
-
 
 
 @endsection
