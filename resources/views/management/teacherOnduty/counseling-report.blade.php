@@ -15,11 +15,16 @@
     .form-control {
         height: 38px; 
     }
+    label {
+        font-size: 14px;
+    }
+
     .badge {
         padding: 8px 12px;
         border-radius: 4px;
         font-weight: bold;
     }
+
     .bg-success {
         background: #C8E4B2 !important;
         color: black;
@@ -39,18 +44,22 @@
     }
     
     @media (max-width: 480px){
+        .page-title {
+            font-size: 15px;
+        }
         .form-label {
-            font-size: 14px;
+            margin-bottom: 10px;
+            font-size: 12px;
         }
         .form-control {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         .btn {
             margin: 5px;
-            padding: 12px !important;
+            padding: 10px !important;
         }
         i {
-            font-size : 15px !important;
+            font-size : 14px !important;
         }
     }
     </style>
@@ -80,9 +89,9 @@
 
         <div class="row mt-3">
             <div class="col-md-12 d-flex">
-                <button type="submit" class="btn btn-primary me-2"><i class="fa fa-search"></i> Search</button>
-                <a href="{{ route('mgt.counseling.index') }}" class="btn btn-secondary me-2"><i class="fa fa-refresh"></i> Reset</a>
-                <button type="submit" name="action" value="download" class="btn btn-success">Download Excel</button> 
+                <button type="submit" class="btn btn-primary me-2"><i class="fa fa-search me-1"></i> Search</button>
+                <a href="{{ route('mgt.counseling.index') }}" class="btn btn-secondary me-2"><i class="fa fa-refresh me-1"></i> Reset</a>
+                <button type="submit" name="action" value="download" class="btn btn-success"><i class="fa fa-download me-1"></i> Download Excel</button> 
             </div>
         </div>
     </form>
