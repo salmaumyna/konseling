@@ -67,7 +67,7 @@
                                     <div class="form-group mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label"><strong>Ubah Status</strong></label>
                                         <div class="col-sm-9">
-                                            <select name="status" id="status" class="form-control" required>
+                                            <select name="status" id="status" class="form-control js-example-basic-multiple" required>
                                                 <option value="">-- Pilih Status --</option>
                                                 <option value="approved">Disetujui</option>
                                                 <option value="rejected">Ditolak</option>

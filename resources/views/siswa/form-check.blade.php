@@ -118,6 +118,7 @@
 .container {
     background: white;
     padding: 2px 15px 1px 15px;
+    max-width: 850px;
     margin-top: 30px;
     margin-bottom: 35px;
     border-radius: 10px;

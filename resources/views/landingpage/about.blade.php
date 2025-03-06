@@ -16,6 +16,91 @@
     @stack('styles')
 
     <style>
+        body {
+            background: url('/assets/img/bg-nis.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background-color: #F5EFFF;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #624e88;
+            margin: 0;
+        }
+
+        /* Login Button */
+        .btn-login {
+            background-color: #624e88;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.5s;
+        }
+
+        .btn-login:hover {
+            background-color: #7F669D;
+        }
+
+        .link-about {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s ease-in-out;
+            padding: 5px 0;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .link-about::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: #624e88;
+            transition: all 0.3s ease-in-out;
+            transform: translateX(-50%);
+        }
+
+        .link-about:hover {
+            color: #624e88;
+        }
+
+        .link-about:hover::after {
+            width: 100%;
+        }
         .about-content {
             margin: 150px auto 50px;
             max-width: 900px;
@@ -101,25 +186,94 @@
         }
 
         .back-button {
-            text-align: center;
-            margin-top: 20px;
+            text-align: right;
+            margin-top: 30px;
         }
 
         .back-button a {
-            background-color: #624e88;
+            background-color: #bfa2db;
             color: white;
             padding: 10px 20px;
-            border-radius: 20px;
+            border-radius: 15px;
             text-decoration: none;
             font-weight: 500;
             transition: 0.5s;
         }
 
         .back-button a:hover {
-            background-color: #7F669D;
+            background-color: #624e88;
         }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            background-color: #FBFBFB;
+            width: 100%;
+        }
+
+        .footer .sitename {
+            font-weight: bold;
+        }
+
+        @media(max-width: 480px) {
+            main {
+                padding: 20px;
+            }
+            .logo h1 {
+                font-size: 15px;
+            }
+            .logo img {
+                height: 25px;
+            }
+            .header {
+                padding: 20px 20px;
+            }
+            .link-about {
+                font-size: 14px;
+            }
+            .btn-login{
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+            .about-content {
+                padding: 42px;
+            }
+            .about-content h2 {
+                font-size: 20px;
+            }
+            .about-content p {
+                font-size: 15px;
+            }
+            .about-content .features h3 {
+                font-size: 17px;
+            }
+            .about-content .features li {
+                font-size: 15px;
+            }
+            .back-button a {
+                font-size: 12px;
+            }
+        }
+
     </style>
 </head>
+<header id="header" class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="{{ url('assets/img/logo-saja.png') }}" alt="Logo" />
+                <h1 class="sitename">Bimbingan Konseling</h1>
+            </a>
+        </div>
+        <div class="about">
+            <a class="link-about me-4" href="{{ route('index') }}">Home</a> 
+        </div>
+        <div class="login">
+            <a class="btn-login" href="{{ route('login') }}">Login</a>
+        </div>
+        
+        
+    </header>
 <body>
     <main class="main">
         <section class="about-content">
@@ -143,7 +297,7 @@
             </p>
 
             <div class="back-button">
-                <a href="{{ route('index') }}">Kembali ke Halaman Utama</a>
+                <a href="{{ route('index') }}"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama</a>
             </div>
         </section>
     </main>
