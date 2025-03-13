@@ -13,7 +13,7 @@
             Kelas
         @endslot
         @slot('li_2')
-            Daftar
+            Daftar Kelas
         @endslot
         @slot('action_button')
             <a href="{{ route('mgt.majors.create') }}" class="btn btn-gradient-primary">

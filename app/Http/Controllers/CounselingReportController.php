@@ -29,9 +29,11 @@ class CounselingReportController extends Controller
             'nis.numeric' => 'NIS harus berupa angka!',
             'nis.exists' => 'NIS tidak ditemukan atau siswa tidak aktif!',
         ]);
-
+        
         return redirect()->route('counseling.form', ['nis' => $request->nis]);
+        
     }
+    
 
     public function showForm($nis)
     {
@@ -58,8 +60,6 @@ class CounselingReportController extends Controller
         ], [
             'date.after_or_equal' => 'Tanggal konseling tidak boleh di masa lalu.',
             'description.required' => 'Alasan wajib diisi.',
-            'teacher_id.required' => 'Guru wajib diisi.',
-            'date.required' => 'Tanggal wajib diisi.',
         ]);
 
         CounselingReport::create([
@@ -72,6 +72,6 @@ class CounselingReportController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect()->route('counseling.nis')->withSuccess('Pengajuan berhasil dikirim!');
+        return redirect()->route('counseling.nis')->with('success', 'Pengajuan berhasil dikirim!');
     }
 }

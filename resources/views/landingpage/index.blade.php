@@ -91,6 +91,38 @@
         background-color: #7F669D;
     }
 
+    .link-about {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        font-size: 16px;
+        position: relative;
+        transition: color 0.3s ease-in-out;
+        padding: 5px 0;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .link-about::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background: #624e88;
+        transition: all 0.3s ease-in-out;
+        transform: translateX(-50%);
+    }
+
+    .link-about:hover {
+        color: #624e88;
+    }
+
+    .link-about:hover::after {
+        width: 100%;
+    }
+
     /* Hero Section */
     .hero {
         margin-top: 120px;
@@ -180,7 +212,6 @@
         padding: 20px 20px 0px 20px;
         font-size: 14px;
         color: #666;
-        background-color: #f8fafc;
         width: 100%;
     }
 
@@ -250,7 +281,14 @@
                 <h1 class="sitename">Bimbingan Konseling</h1>
             </a>
         </div>
-        <a class="btn-login" href="{{ route('about') }}">About</a> <a class="btn-login" href="{{ route('login') }}">Login</a>
+        <div class="about">
+            <a class="link-about me-4" href="{{ route('about') }}">About</a> 
+        </div>
+        <div class="login">
+            <a class="btn-login" href="{{ route('login') }}">Login</a>
+        </div>
+        
+        
     </header>
 
     <!-- Hero Section -->
