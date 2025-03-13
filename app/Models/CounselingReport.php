@@ -17,6 +17,7 @@ class CounselingReport extends Model
         'major_id',
         'teacher_id',
         'date', 
+        'time',
         'description', 
         'reason', 
         'status'

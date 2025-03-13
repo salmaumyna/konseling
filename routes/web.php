@@ -17,6 +17,8 @@ use App\Http\Controllers\Management\Counseling_ReportController as MgtCounseling
 use App\Http\Controllers\Management\MajorsController as MgtMajorController;
 use App\Http\Controllers\Management\ClassesController as MgtClassController;
 use App\Http\Controllers\Management\StudentsController as MgtStudentsController;
+use App\Http\Controllers\Management\UnavailableScheduleController as MgtUnavailableScheduleController;
+use App\Http\Controllers\Management\ScheduleReportController as MgtScheduleReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,7 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::get('/dashboard-redirect', function() {
         return redirect()->route('mgt.dashboard');
     })->name('dashboard.index');
+
 
     Route::name('mgt.')->prefix('managements')->group(function() {
         Route::controller(MgtDashboardController::class)->prefix('dashboard')->name('dashboard.')->group(function () {
@@ -76,6 +79,16 @@ Route::middleware(Authenticate::class)->group(function () {
             Route::put('/{id}/inactivate', 'inactivate')->name('inactivate');
             Route::delete('/{id}', 'remove')->name('remove');
         });
+
+        Route::controller(MgtUnavailableScheduleController::class)->prefix('schedules')->name('schedules.')->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+                Route::get('/create', 'create')->name('create');
+                Route::get('/{id}/edit', 'edit')->name('edit');
+                Route::put('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'remove')->name('remove');
+            });
+
         
         Route::controller(MgtStudentsController::class)->prefix('students')->name('students.')->group(function () {
             Route::get('/', 'index')->name('index');
@@ -88,7 +101,10 @@ Route::middleware(Authenticate::class)->group(function () {
             Route::delete('/{id}', 'remove')->name('remove');
         });
         
-        
+        Route::controller(MgtScheduleReportController::class)->prefix('report-schedule')->name('reportschedule.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/download', 'download')->name('download');
+        });
   
 
         Route::controller(MgtProfileController::class)->prefix('profile')->name('profile.')->group(function () {
@@ -115,6 +131,8 @@ Route::get('/students/jadwal-konseling/nis', [CounselingReportController::class,
 Route::post('/students/jadwal-konseling/form', [CounselingReportController::class, 'processNis'])->name('counseling.process');
 Route::get('/students/jadwal-konseling/form/{nis}', [CounselingReportController::class, 'showForm'])->name('counseling.form');
 Route::post('/students/jadwal-konseling/submit', [CounselingReportController::class, 'submitForm'])->name('counseling.submit');
+Route::get('/get-available-teachers', [CounselingReportController::class, 'getAvailableTeachers']);
+Route::get('/get-available-times', [CounselingReportController::class, 'getAvailableTimes']);
 
 Route::get('/students/counseling/status', [CounselingStatusController::class, 'showNisForm'])->name('counseling.status.form');
 Route::post('/students/counseling/status', [CounselingStatusController::class, 'checkStatus'])->name('counseling.status.check');

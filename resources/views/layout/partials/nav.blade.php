@@ -31,10 +31,22 @@ $sidebarItems = [
         "levels" => ["admin"]
     ],
     [
+        "title" => "Penjadwalan",
+        "icon" => "fa fa-calendar",
+        "url" => "/managements/schedules",
+        "levels" => ["teacher"]
+    ],
+    [
+        "title" => "Laporan jadwal",
+        "icon" => "fa fa-calendar",
+        "url" => "/managements/report-schedule",
+        "levels" => ["admin"]
+    ],
+    [
         "title" => "Laporan Konseling",
         "icon" => "fa fa-pencil-square-o",
         "url" => "/managements/counseling",
-        "levels" => ["teacher", "admin"]
+        "levels" => ["teacher"]
     ],
     [
         "title" => "Laporan Selesai",
