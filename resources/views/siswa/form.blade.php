@@ -80,6 +80,24 @@
         font-size: 13px;
         font-weight: bold;
     }
+    
+    #time-checkboxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: -4px;
+        margin-right: -8px;
+    }
+    
+    #time-checkboxes .col-md-4 {
+        padding: 0 8px;
+    }
+    
+    .form-check {
+        padding-left: 5px;
+    }
 </style>
 
 <div class="form-container">
@@ -118,7 +136,7 @@
                 <select name="teacher_id" class="form-control @error('teacher_id') is-invalid @enderror">
                     <option value="">-- Pilih Guru BK --</option>
                     @foreach($teachers as $teacher)
-                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                        <option value="{{ $teacher->id }}" {{ old('teacher_id') == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
                     @endforeach
                 </select>
                 @error('teacher_id')
@@ -128,15 +146,37 @@
 
             <div class="form-group">
                 <label>Tanggal Konseling <span class="text-danger">*</span></label>
-                <input type="date" name="date" class="form-control @error('date') is-invalid @enderror">
+                <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}">
                 @error('date')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
+            <div class="form-group" id="time-selection" style="display:none;">
+                <label>Jam Konseling <span class="text-danger">*</span></label>
+                <div id="time-checkboxes">
+                    @foreach($availableHours as $hour)
+                        <div class="col-md-4 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input time-checkbox" type="radio" name="time" value="{{ $hour }}" id="time{{ str_replace(':', '', $hour) }}" {{ old('time') == $hour ? 'checked' : '' }}>
+                                <label class="form-check-label time-label" for="time{{ str_replace(':', '', $hour) }}">
+                                    {{ $hour }}
+                                </label>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div id="full-day-unavailable" class="alert alert-warning" style="display:none;">
+                    Guru BK tidak tersedia pada tanggal yang dipilih. Silakan pilih tanggal lain.
+                </div>
+                @error('time')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="form-group">
                 <label>Alasan Konseling <span class="text-danger">*</span></label>
-                <textarea name="description" class="form-control @error('description') is-invalid @enderror"></textarea>
+                <textarea name="description" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -156,4 +196,79 @@
 
 @include('layout.partials.footer-scripts')
 @stack('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const teacherSelect = document.querySelector('select[name="teacher_id"]');
+        const dateInput = document.querySelector('input[name="date"]');
+        const timeSelection = document.getElementById('time-selection');
+        const timeCheckboxes = document.querySelectorAll('.time-checkbox');
+        const timeLabels = document.querySelectorAll('.time-label');
+        const fullDayUnavailableAlert = document.getElementById('full-day-unavailable');
+        
+        function checkAvailability() {
+            const teacherId = teacherSelect.value;
+            const date = dateInput.value;
+            
+            if (!teacherId || !date) {
+                timeSelection.style.display = 'none';
+                return;
+            }
+            
+            timeCheckboxes.forEach(checkbox => {
+                checkbox.disabled = false;
+                checkbox.checked = false;
+            });
+            
+            timeLabels.forEach(label => {
+                label.style.textDecoration = '';
+                label.style.color = '';
+            });
+            
+            fullDayUnavailableAlert.style.display = 'none';
+            
+            $.ajax({
+                url: '/counseling/unavailable-times',
+                type: 'GET',
+                data: {
+                    teacher_id: teacherId,
+                    date: date
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.full_day) {
+                        fullDayUnavailableAlert.style.display = 'block';
+                        timeCheckboxes.forEach(checkbox => {
+                            checkbox.disabled = true;
+                        });
+                    } else {
+                        data.unavailable_times.forEach(time => {
+                            const checkbox = document.getElementById(`time${time.replace(':', '')}`);
+                            if (checkbox) {
+                                checkbox.disabled = true;
+                                
+                                const label = document.querySelector(`label[for="time${time.replace(':', '')}"]`);
+                                if (label) {
+                                    label.style.textDecoration = 'line-through';
+                                    label.style.color = '#999';
+                                }
+                            }
+                        });
+                    }
+                    
+                    timeSelection.style.display = 'block';
+                },
+                error: function(xhr, status, error) {
+                    alert('Error.');
+                }
+            });
+        }
+
+        $(teacherSelect).on('change', checkAvailability);
+        $(dateInput).on('change', checkAvailability);
+        
+        if (teacherSelect.value && dateInput.value) {
+            checkAvailability();
+        }
+    });
+</script>
 @endsection

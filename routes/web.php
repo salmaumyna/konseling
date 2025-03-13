@@ -132,6 +132,7 @@ Route::get('/students/jadwal-konseling/nis', [CounselingReportController::class,
 Route::post('/students/jadwal-konseling/form', [CounselingReportController::class, 'processNis'])->name('counseling.process');
 Route::get('/students/jadwal-konseling/form/{nis}', [CounselingReportController::class, 'showForm'])->name('counseling.form');
 Route::post('/students/jadwal-konseling/submit', [CounselingReportController::class, 'submitForm'])->name('counseling.submit');
+Route::get('/counseling/unavailable-times', [CounselingReportController::class, 'getUnavailableTimes'])->name('counseling.unavailable-times');
 
 
 Route::get('/students/counseling/status', [CounselingStatusController::class, 'showNisForm'])->name('counseling.status.form');
