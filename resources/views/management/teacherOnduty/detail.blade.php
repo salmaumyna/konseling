@@ -31,31 +31,31 @@
                             <div class="form-group mb-3 row align-items-center">
                                 <label class="col-sm-3 col-form-label"><strong>NIS</strong></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="{{ $report->student->nis }}" readonly>
+                                    <input type="text" class="form-control" value="{{ $report->student->nis }}" disabled readonly>
                                 </div>
                             </div>
                             <div class="form-group mb-3 row align-items-center">
                                 <label class="col-sm-3 col-form-label"><strong>Nama Siswa</strong></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="{{ $report->student->nama }}" readonly>
+                                    <input type="text" class="form-control" value="{{ $report->student->nama }}" disabled readonly>
                                 </div>
                             </div>
                             <div class="form-group mb-3 row align-items-center">
                                 <label class="col-sm-3 col-form-label"><strong>Kelas</strong></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="{{ $report->class->name ?? '-' }}" readonly>
+                                    <input type="text" class="form-control" value="{{ $report->class->name ?? '-' }}" disabled readonly>
                                 </div>
                             </div>
                             <div class="form-group mb-3 row align-items-center">
                                 <label class="col-sm-3 col-form-label"><strong>Tanggal Konseling</strong></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" value="{{ $report->date }}" readonly>
+                                    <input type="text" class="form-control" value="{{ $report->date }}" disabled readonly>
                                 </div>
                             </div>
                             <div class="form-group mb-3 row align-items-center">
                                 <label class="col-sm-3 col-form-label"><strong>Deskripsi</strong></label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" readonly>{{ $report->description }}</textarea>
+                                    <textarea class="form-control" disabled readonly>{{ $report->description }}</textarea>
                                 </div>
                             </div>
 
@@ -65,9 +65,9 @@
                                     @method('PUT')
 
                                     <div class="form-group mb-3 row align-items-center">
-                                        <label class="col-sm-3 col-form-label"><strong>Ubah Status</strong></label>
+                                        <label class="col-sm-3 col-form-label"><strong>Ubah Status</strong> <span class="text-danger">*</span></label>
                                         <div class="col-sm-9">
-                                            <select name="status" id="status" class="form-control js-example-basic-multiple" required>
+                                            <select name="status" id="status" class="form-control" required>
                                                 <option value="">-- Pilih Status --</option>
                                                 <option value="approved">Disetujui</option>
                                                 <option value="rejected">Ditolak</option>
@@ -76,7 +76,7 @@
                                     </div>
 
                                     <div class="form-group mb-3 row align-items-center d-none" id="reasonDiv">
-                                        <label class="col-sm-3 col-form-label"><strong>Alasan Penolakan</strong></label>
+                                        <label class="col-sm-3 col-form-label"><strong>Alasan Penolakan</strong> <span class="text-danger">*</span></label>
                                         <div class="col-sm-9">
                                             <textarea name="reason" id="reason" class="form-control" placeholder="Masukkan Alasan"></textarea>
                                         </div>
@@ -92,26 +92,26 @@
                                     <label class="col-sm-3 col-form-label"><strong>Status</strong></label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" 
-                                            value="{{ $report->status === 'approved' ? 'Disetujui' : 'Ditolak' }}" readonly>
+                                            value="{{ $report->status === 'approved' ? 'Disetujui' : 'Ditolak' }}" disabled readonly>
                                     </div>
+                                    @error('status')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 @if($report->status === 'rejected')
                                     <div class="form-group mb-3 row align-items-center">
                                         <label class="col-sm-3 col-form-label"><strong>Alasan Penolakan</strong></label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" value="{{ $report->reason }}" readonly>
+                                            <input type="text" class="form-control" value="{{ $report->reason }}" disabled readonly>
                                         </div>
                                     </div>
                                 @endif
                             @endif
                         </div>
-
-                        <div class="col-md-4 text-center">
-                            @if($report->student->photo)
-                                <img src="{{ Storage::url($report->student->photo) }}" alt="Foto Siswa" class="img-thumbnail" style="max-width: 200px;">
-                            @endif
-                        </div>
+                        <span class="text-muted">
+                            <strong class="text-danger">* Harus diisi</strong>
+                        </span>
                     </div>
                 </div>
             </div>

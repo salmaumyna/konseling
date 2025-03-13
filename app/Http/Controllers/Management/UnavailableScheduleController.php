@@ -17,7 +17,7 @@ class UnavailableScheduleController extends Controller
      */
     public function index(Request $request)
     {
-        $query = UnavailableSchedule::query();
+        $query = UnavailableSchedule::where('user_id', Auth::id());
         
         if ($request->filled('date_start')) {
             $query->whereDate('date', '>=', $request->date_start);

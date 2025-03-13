@@ -23,8 +23,13 @@ class ScheduleReportController extends Controller
         $query = UnavailableSchedule::query();
         
         // Filter by name if provided
+        $query = UnavailableSchedule::with('user'); // Pastikan relasi ke user di-load
+        
+        // Filter berdasarkan nama user
         if ($request->filled('name')) {
-            $query->where('name', 'like', '%' . $request->name . '%');
+            $query->whereHas('user', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->name . '%');
+            });
         }
         
         // Filter by date range

@@ -117,6 +117,7 @@ Route::middleware(Authenticate::class)->group(function () {
             Route::get('/reports/{id}', [MgtCounselingReportController::class, 'show'])->name('detail');
             Route::put('/reports/{id}/update', [MgtCounselingReportController::class, 'updateStatus'])->name('updateStatus');
             Route::get('/export', [MgtCounselingReportController::class, 'exportExcel'])->name('download'); 
+            
         });
 
         Route::controller(MgtReportApprovedController::class)->prefix('approved')->name('counseling.')->group(function () {
@@ -131,8 +132,7 @@ Route::get('/students/jadwal-konseling/nis', [CounselingReportController::class,
 Route::post('/students/jadwal-konseling/form', [CounselingReportController::class, 'processNis'])->name('counseling.process');
 Route::get('/students/jadwal-konseling/form/{nis}', [CounselingReportController::class, 'showForm'])->name('counseling.form');
 Route::post('/students/jadwal-konseling/submit', [CounselingReportController::class, 'submitForm'])->name('counseling.submit');
-Route::get('/get-available-teachers', [CounselingReportController::class, 'getAvailableTeachers']);
-Route::get('/get-available-times', [CounselingReportController::class, 'getAvailableTimes']);
+
 
 Route::get('/students/counseling/status', [CounselingStatusController::class, 'showNisForm'])->name('counseling.status.form');
 Route::post('/students/counseling/status', [CounselingStatusController::class, 'checkStatus'])->name('counseling.status.check');

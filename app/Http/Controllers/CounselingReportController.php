@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClassModel;
 use App\Models\CounselingReport;
-use App\Models\Major;
+use App\Models\UnavailableSchedule;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,7 +47,7 @@ class CounselingReportController extends Controller
 
         return view('siswa.form', compact('student', 'teachers'));
     }
-
+    
     public function submitForm(Request $request)
     {
         $request->validate([

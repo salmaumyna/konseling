@@ -52,7 +52,11 @@ class Counseling_ReportController extends Controller
         $request->validate([
             'status' => 'required|in:approved,rejected',
             'reason' => 'nullable|required_if:status,rejected',
-        ]);
+        ],[
+            'status.required' => 'Status harus di isi!',
+            'reason.required_if:status,rejected' => 'alasan penolakan harus di isi!'
+        ]
+    );
 
         $report = CounselingReport::findOrFail($id);
         $report->status = $request->status;

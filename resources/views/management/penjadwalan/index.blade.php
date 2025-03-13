@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-12">
             <!-- Filter Form -->
-[        <form action="{{ route('mgt.schedules.index') }}" method="GET" class="mb-4" id="schedule-filter-form">
+        <form action="{{ route('mgt.schedules.index') }}" method="GET" class="mb-4" id="schedule-filter-form">
             <div class="row align-items-end">
                 <div class="col-md-5">
                     <div class="form-group">
@@ -43,7 +43,7 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary w-100" id="filter-submit-btn">
-                            <i class="fa fa-search"></i> Filter
+                            <i class="fa fa-search"></i> 
                         </button>
                     </div>
                 </div>

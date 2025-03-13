@@ -18,9 +18,10 @@
                 <h5 class="card-title mb-3">Filter Laporan</h5>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="form-group mb-3">
-                            <label for="name" class="form-label">Nama</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{ request('name') }}" placeholder="Cari berdasarkan nama">
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <input type="text" class="form-control" id="name" name="name" 
+                                value="{{ request('name') }}" placeholder="Cari berdasarkan nama">
                         </div>
                     </div>
                     <div class="col-md-4">
